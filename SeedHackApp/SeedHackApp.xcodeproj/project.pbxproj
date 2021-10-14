@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1018E5622718488F00D21D44 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E5612718488F00D21D44 /* DetailView.swift */; };
+		1018E5632718488F00D21D44 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E5612718488F00D21D44 /* DetailView.swift */; };
+		10AF8EE62717D2BF00A293F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
+		10AF8EE72717D2C000A293F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
+		10AF8EEC2717D46000A293F3 /* SeedHack in Frameworks */ = {isa = PBXBuildFile; productRef = 10AF8EEB2717D46000A293F3 /* SeedHack */; };
+		10AF8EED2717D4BA00A293F3 /* SearchSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F02716E71700D48B76 /* SearchSeedView.swift */; };
+		10AF8EEE2717D4BA00A293F3 /* AnalyzeSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */; };
+		10AF8EF02717D4CF00A293F3 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 10AF8EEF2717D4CF00A293F3 /* SwiftUIX */; };
+		10AF8EF32717D50600A293F3 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F52716E79200D48B76 /* SystemImage.swift */; };
+		10AF8EF42717D50600A293F3 /* Salmonid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358FA2716F1CC00D48B76 /* Salmonid.swift */; };
+		10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */; };
+		10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */; };
 		10D358C82716E6BB00D48B76 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C72716E6BB00D48B76 /* Tests_iOS.swift */; };
 		10D358CA2716E6BB00D48B76 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C92716E6BB00D48B76 /* Tests_iOSLaunchTests.swift */; };
 		10D358D42716E6BB00D48B76 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358D32716E6BB00D48B76 /* Tests_macOS.swift */; };
@@ -15,8 +27,6 @@
 		10D358D82716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358AF2716E6B900D48B76 /* SeedHackAppApp.swift */; };
 		10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358B02716E6B900D48B76 /* ContentView.swift */; };
 		10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358B02716E6B900D48B76 /* ContentView.swift */; };
-		10D358DB2716E6BB00D48B76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
-		10D358DC2716E6BB00D48B76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
 		10D358EE2716E6D000D48B76 /* SeedHack in Frameworks */ = {isa = PBXBuildFile; productRef = 10D358ED2716E6D000D48B76 /* SeedHack */; };
 		10D358F12716E71700D48B76 /* SearchSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F02716E71700D48B76 /* SearchSeedView.swift */; };
 		10D358F32716E72300D48B76 /* AnalyzeSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */; };
@@ -43,10 +53,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1018E5612718488F00D21D44 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationStyle.swift; sourceTree = "<group>"; };
 		10D358AF2716E6B900D48B76 /* SeedHackAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedHackAppApp.swift; sourceTree = "<group>"; };
 		10D358B02716E6B900D48B76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		10D358B12716E6BB00D48B76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		10D358B62716E6BB00D48B76 /* SeedHackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedHackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		10D358B62716E6BB00D48B76 /* Seed Hack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seed Hack.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D358BC2716E6BB00D48B76 /* SeedHackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedHackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D358BE2716E6BB00D48B76 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		10D358C32716E6BB00D48B76 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10AF8EEC2717D46000A293F3 /* SeedHack in Frameworks */,
+				10AF8EF02717D4CF00A293F3 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +131,7 @@
 				10D358F42716E77E00D48B76 /* Enum */,
 				10D358EF2716E70700D48B76 /* Views */,
 				10D358B12716E6BB00D48B76 /* Assets.xcassets */,
+				10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -124,7 +139,7 @@
 		10D358B72716E6BB00D48B76 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				10D358B62716E6BB00D48B76 /* SeedHackApp.app */,
+				10D358B62716E6BB00D48B76 /* Seed Hack.app */,
 				10D358BC2716E6BB00D48B76 /* SeedHackApp.app */,
 				10D358C32716E6BB00D48B76 /* Tests iOS.xctest */,
 				10D358CF2716E6BB00D48B76 /* Tests macOS.xctest */,
@@ -170,6 +185,7 @@
 			children = (
 				10D358F02716E71700D48B76 /* SearchSeedView.swift */,
 				10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */,
+				1018E5612718488F00D21D44 /* DetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,7 +220,7 @@
 				10D358F82716E9D500D48B76 /* SwiftUIX */,
 			);
 			productName = "SeedHackApp (iOS)";
-			productReference = 10D358B62716E6BB00D48B76 /* SeedHackApp.app */;
+			productReference = 10D358B62716E6BB00D48B76 /* Seed Hack.app */;
 			productType = "com.apple.product-type.application";
 		};
 		10D358BB2716E6BB00D48B76 /* SeedHackApp (macOS) */ = {
@@ -220,6 +236,10 @@
 			dependencies = (
 			);
 			name = "SeedHackApp (macOS)";
+			packageProductDependencies = (
+				10AF8EEB2717D46000A293F3 /* SeedHack */,
+				10AF8EEF2717D4CF00A293F3 /* SwiftUIX */,
+			);
 			productName = "SeedHackApp (macOS)";
 			productReference = 10D358BC2716E6BB00D48B76 /* SeedHackApp.app */;
 			productType = "com.apple.product-type.application";
@@ -315,7 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10D358DB2716E6BB00D48B76 /* Assets.xcassets in Resources */,
+				10AF8EE62717D2BF00A293F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10D358DC2716E6BB00D48B76 /* Assets.xcassets in Resources */,
+				10AF8EE72717D2C000A293F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,9 +369,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				10D358F32716E72300D48B76 /* AnalyzeSeedView.swift in Sources */,
+				1018E5622718488F00D21D44 /* DetailView.swift in Sources */,
 				10D358F12716E71700D48B76 /* SearchSeedView.swift in Sources */,
 				10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358F62716E79200D48B76 /* SystemImage.swift in Sources */,
+				10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358FB2716F1CC00D48B76 /* Salmonid.swift in Sources */,
 				10D358D72716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */,
 			);
@@ -361,6 +383,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10AF8EF32717D50600A293F3 /* SystemImage.swift in Sources */,
+				1018E5632718488F00D21D44 /* DetailView.swift in Sources */,
+				10AF8EF42717D50600A293F3 /* Salmonid.swift in Sources */,
+				10AF8EED2717D4BA00A293F3 /* SearchSeedView.swift in Sources */,
+				10AF8EEE2717D4BA00A293F3 /* AnalyzeSeedView.swift in Sources */,
+				10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358D82716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */,
 			);
@@ -516,8 +544,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -526,14 +555,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.SeedHackApp;
-				PRODUCT_NAME = SeedHackApp;
+				PRODUCT_NAME = "Seed Hack";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -546,8 +575,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -556,14 +586,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.SeedHackApp;
-				PRODUCT_NAME = SeedHackApp;
+				PRODUCT_NAME = "Seed Hack";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -585,6 +615,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -613,6 +644,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -791,6 +823,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		10AF8EEB2717D46000A293F3 /* SeedHack */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SeedHack;
+		};
+		10AF8EEF2717D4CF00A293F3 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10D358F72716E9D500D48B76 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
 		10D358ED2716E6D000D48B76 /* SeedHack */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SeedHack;

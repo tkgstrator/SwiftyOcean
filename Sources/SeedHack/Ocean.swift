@@ -88,33 +88,25 @@ public final class Ocean: ObservableObject {
             self.index = index
             self.mWaveSeed = initialSeed
             self.mWaveArray = waveArray
-//            getWaveArray()
         }
         
-        let index: Int
+        public let index: Int
         private var mWaveArray: [UpdateType]
         public var mWaveSeed: Int64 = 0
-        public var mEnemyAppearId: [Int] = [-1]
-        public var mBossArray: [SalmonType] = []
+        public var mWaveUpdateEventArray: [WaveUpdateEvent] = []
         public var mGeyserArray: [GeyserPosition] = []
         public var eventType: EventType = .noevent
         public var waterLevel: WaterLevel = .middle
         
         public func getWaveArray() {
-            /// 初期化
-            mEnemyAppearId.removeAll(keepingCapacity: true)
-            mBossArray.removeAll(keepingCapacity: true)
-            mGeyserArray.removeAll(keepingCapacity: true)
-            mEnemyAppearId = [-1]
-            
             // イベント内容で分岐
             switch eventType {
                 case .noevent, .cohockcharge, .fog:
-                    getEnemyArray()
+                    mWaveUpdateEventArray = getEnemyArray()
                 case .rush:
                     break
                 case .goldieseeking:
-                    getGeyserArray(.shakeride, waterLevel: waterLevel)
+                    mGeyserArray = getGeyserArray(.shakeride, waterLevel: waterLevel)
                 case .griller:
                     break
                 case .mothership:
@@ -122,44 +114,67 @@ public final class Ocean: ObservableObject {
             }
         }
         
-        private func getEnemyArray() {
+        private func getEnemyArray() -> [WaveUpdateEvent] {
             let rnd: Random = Random(seed: self.mWaveSeed)
             rnd.getU32()
             
+            var mWaveEventArray: [WaveUpdateEvent] = []
+            var mBossArray: [SalmonType] = []
+            var mEnemyAppearId: [AppearType] = [.none]
+            
             for type in mWaveArray {
-                guard let mLastEnemyAppearId = mEnemyAppearId.last else { return }
+                guard let mLastEnemyAppearId = mEnemyAppearId.last else { return [] }
                 switch type {
                     case .update:
+                        // 一回無駄に消化
                         getEnemyAppearId(random: rnd.getU32(), mEnemyAppearId: mLastEnemyAppearId)
                     case .change:
-                        mEnemyAppearId.append(getEnemyAppearId(random: rnd.getU32(), mEnemyAppearId: mLastEnemyAppearId))
+                        guard let appearId: AppearType = AppearType(rawValue: getEnemyAppearId(random: rnd.getU32(), mEnemyAppearId: mLastEnemyAppearId)) else { return [] }
+                        if !mBossArray.isEmpty {
+                            mWaveEventArray.append(WaveUpdateEvent(index: mWaveEventArray.count, appearType: mLastEnemyAppearId, salmonid: mBossArray))
+                            mBossArray.removeAll()
+                        }
+                        mEnemyAppearId.append(appearId)
                     case .appear:
-                        mBossArray.append(getEnemyId(mEnemySeed: rnd.getU32()))
+                        switch eventType {
+                            case .fog:
+                                if (mWaveEventArray.flatMap({ $0.salmonid }).count + mBossArray.count + 1) % 5 == 0 {
+                                    rnd.getU32()
+                                    mBossArray.append(.shakegoldie)
+                                } else {
+                                    mBossArray.append(getEnemyId(mEnemySeed: rnd.getU32()))
+                                }
+                            default:
+                                mBossArray.append(getEnemyId(mEnemySeed: rnd.getU32()))
+                        }
                     case .none:
                         break
                 }
             }
+            return mWaveEventArray
         }
         
-        private func getGeyserArray(_ stage: StageType, waterLevel: WaterLevel) {
+        private func getGeyserArray(_ stage: StageType, waterLevel: WaterLevel) -> [GeyserPosition] {
+            let rnd: Random = Random(seed: mWaveSeed)
             // 潮位とステージに合わせた配列を読み込む
             var geyser: [GeyserType] = waterLevel == .middle ? stage.middle : stage.high
-            let rnd: Random = Random(seed: mWaveSeed)
+            var position: [GeyserPosition] = []
 
             for _ in 0 ... 15 {
                 for sel in (1 ... (geyser.count - 1)).reversed() {
                     let index: Int64 = (rnd.getU32() * Int64(sel + 1)) >> 0x20
                     geyser.swapAt(Int(sel), Int(index))
                 }
-                guard let firstGeyser = geyser.first else { return }
+                guard let firstGeyser = geyser.first else { return [] }
                 
                 if firstGeyser.mFlag {
                     let index: Int64 = (rnd.getU32() * Int64(firstGeyser.mDest.count)) >> 0x20
-                    mGeyserArray.append(GeyserPosition(succ: firstGeyser.mSucc, dest: firstGeyser.mDest[Int(index)]))
+                    position.append(GeyserPosition(succ: firstGeyser.mSucc, dest: firstGeyser.mDest[Int(index)]))
                 } else {
-                    mGeyserArray.append(GeyserPosition(succ: firstGeyser.mSucc, dest: firstGeyser.mDest.first ?? 0))
+                    position.append(GeyserPosition(succ: firstGeyser.mSucc, dest: firstGeyser.mDest.first ?? 0))
                 }
             }
+            return position
         }
         
         /// 出現するオオモノシャケの種類を返す
@@ -167,12 +182,18 @@ public final class Ocean: ObservableObject {
             let rnd: Random = Random(seed: mEnemySeed)
             var mRareId: SalmonType = .shakebomber
             
-            for salmonId in SalmonType.allCases {
+            for salmonId in SalmonType.normal {
                 if !Bool((rnd.getU32() * (salmonId.rawValue + 1)) >> 0x20) {
                     mRareId = salmonId
                 }
             }
             return mRareId
+        }
+        
+        /// シャケが出現する湧き方向を返す
+        @discardableResult
+        private func getEnemyAppearId(random: Int64, mEnemyAppearId: AppearType) -> Int {
+            getEnemyAppearId(random: random, mEnemyAppearId: mEnemyAppearId.rawValue)
         }
        
         /// シャケが出現する湧き方向を返す
@@ -233,6 +254,19 @@ public final class Ocean: ObservableObject {
         }
     }
     
+    public struct WaveUpdateEvent {
+        public let index: Int
+        public let appearType: AppearType
+        public let salmonid: [SalmonType]
+    }
+    
+    public enum AppearType: Int, CaseIterable {
+        case none   = -1
+        case right  = 1
+        case center = 2
+        case left   = 3
+    }
+    
     /// 各タイミングでのアップデート種類
     enum UpdateType: Int, CaseIterable {
         /// 湧き方向変化
@@ -247,16 +281,23 @@ public final class Ocean: ObservableObject {
     
     /// オオモノシャケの種類
     public enum SalmonType: Int64, CaseIterable {
-        case shakebomber
-        case shakecup
-        case shakeshield
-        case shakesnake
-        case shaketower
-        case shakediver
-        case shakerocket
+        case shakegoldie = -1
+        case shakebomber = 0
+        case shakecup = 1
+        case shakeshield = 2
+        case shakesnake = 3
+        case shaketower = 4
+        case shakediver = 5
+        case shakedozer = -2
+        case shakerocket = 6
         
         /// 重み
         var prob: Int64 { 1 }
+        
+        /// 通常オオモノ
+        public static var normal: [SalmonType] {
+            [.shakebomber, .shakecup, .shakeshield, .shakesnake, .shaketower, .shakediver, .shakerocket]
+        }
     }
     
     /// 潮位
