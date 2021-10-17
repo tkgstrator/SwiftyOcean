@@ -42,7 +42,6 @@ struct AnalyzeSeedView: View {
                 }, onCommit: {
                     if let initialSeed = initialSeed, let mGameSeed = Int64(initialSeed, radix: 16) {
                         ocean.setGameSeed(mGameSeed: mGameSeed)
-                        ocean.getWaveInfo()
                     }
                 })
                     .keyboardType(.alphabet)

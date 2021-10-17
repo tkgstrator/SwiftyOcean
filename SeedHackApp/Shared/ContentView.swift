@@ -20,7 +20,12 @@ struct ContentView: View {
                 .tabItem({
                     Image(.search)
                     Text("Search")
-                }).tag(0)
+                }).tag(1)
+            SettingView()
+                .tabItem({
+                    Image(.setting)
+                    Text("Setting")
+                }).tag(2)
         }
     }
 }
