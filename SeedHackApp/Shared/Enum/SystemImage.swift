@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 enum SystemImage: String, CaseIterable {
     public enum Package {
         public static let namespace = "System"

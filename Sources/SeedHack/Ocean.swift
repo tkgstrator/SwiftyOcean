@@ -9,7 +9,7 @@ import Foundation
 
 public final class Ocean: ObservableObject {
     /// 初期ゲームシード
-    private(set) var mGameSeed: Int64
+    public private(set) var mGameSeed: Int64
     /// WAVE情報
     @Published public var mWave: [Wave] = []
     /// WAVE情報更新タイミング配列
@@ -28,7 +28,10 @@ public final class Ocean: ObservableObject {
             Wave(1, rnd.getU32(), mWaveArray[1]),
             Wave(2, rnd.getU32(), mWaveArray[2])
         ]
+        getWaveInfo()
     }
+    
+    deinit {}
     
     convenience public init(mGameSeed: Int32) {
         self.init(mGameSeed: Int64(mGameSeed))
@@ -47,17 +50,18 @@ public final class Ocean: ObservableObject {
             Wave(1, rnd.getU32(), mWaveArray[1]),
             Wave(2, rnd.getU32(), mWaveArray[2])
         ]
+        getWaveInfo()
     }
     
     public func setGameSeed(mGameSeed: Int32) {
         setGameSeed(mGameSeed: Int64(mGameSeed))
     }
     
-    public func getWaveInfo() {
+    private func getWaveInfo() {
         let rnd: Random = Random(seed: mGameSeed)
-        var sum: Int64 = 0
         
         for wave in mWave {
+            var sum: Int64 = 0
             for eventType in EventType.allCases {
                 if wave.index > 0 && mWave[wave.index - 1].eventType != .noevent && mWave[wave.index - 1].eventType == eventType {
                     continue
@@ -84,9 +88,9 @@ public final class Ocean: ObservableObject {
     
     /// WAVE情報を持つクラス
     public class Wave {
-        internal init(_ index: Int, _ initialSeed: Int64, _ waveArray: [UpdateType]) {
+        internal init(_ index: Int, _ mWaveSeed: Int64, _ waveArray: [UpdateType]) {
             self.index = index
-            self.mWaveSeed = initialSeed
+            self.mWaveSeed = mWaveSeed
             self.mWaveArray = waveArray
         }
         

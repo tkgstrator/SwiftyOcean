@@ -9,6 +9,25 @@
 /* Begin PBXBuildFile section */
 		1018E5622718488F00D21D44 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E5612718488F00D21D44 /* DetailView.swift */; };
 		1018E5632718488F00D21D44 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E5612718488F00D21D44 /* DetailView.swift */; };
+		1018E56F271BA68800D21D44 /* SWCompression in Frameworks */ = {isa = PBXBuildFile; productRef = 1018E56E271BA68800D21D44 /* SWCompression */; };
+		1018E571271BA6C100D21D44 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E570271BA6C100D21D44 /* SettingView.swift */; };
+		1018E572271BA6C100D21D44 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E570271BA6C100D21D44 /* SettingView.swift */; };
+		1018E579271BA9E500D21D44 /* SeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E578271BA9E500D21D44 /* SeedManager.swift */; };
+		1018E57A271BA9E500D21D44 /* SeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E578271BA9E500D21D44 /* SeedManager.swift */; };
+		1018E57C271BB5AA00D21D44 /* 000000.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E57B271BB5AA00D21D44 /* 000000.bin */; };
+		1018E57D271BB5AA00D21D44 /* 000000.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E57B271BB5AA00D21D44 /* 000000.bin */; };
+		1018E57F271BB5F500D21D44 /* RealmSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E57E271BB5F500D21D44 /* RealmSeed.swift */; };
+		1018E580271BB5F500D21D44 /* RealmSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018E57E271BB5F500D21D44 /* RealmSeed.swift */; };
+		1018E583271BB7C600D21D44 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1018E582271BB7C600D21D44 /* RealmSwift */; };
+		1018E585271BD3F000D21D44 /* 222122.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E584271BD3EF00D21D44 /* 222122.bin */; };
+		1018E586271BD3F000D21D44 /* 222122.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E584271BD3EF00D21D44 /* 222122.bin */; };
+		1018E58A271BD4A900D21D44 /* 222422.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E587271BD4A900D21D44 /* 222422.bin */; };
+		1018E58B271BD4A900D21D44 /* 222422.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E587271BD4A900D21D44 /* 222422.bin */; };
+		1018E58C271BD4A900D21D44 /* 222322.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E588271BD4A900D21D44 /* 222322.bin */; };
+		1018E58D271BD4A900D21D44 /* 222322.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E588271BD4A900D21D44 /* 222322.bin */; };
+		1018E58E271BD4A900D21D44 /* 222522.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E589271BD4A900D21D44 /* 222522.bin */; };
+		1018E58F271BD4A900D21D44 /* 222522.bin in Resources */ = {isa = PBXBuildFile; fileRef = 1018E589271BD4A900D21D44 /* 222522.bin */; };
+		1018E59B271BE1E600D21D44 /* SeedHack in Frameworks */ = {isa = PBXBuildFile; productRef = 1018E59A271BE1E600D21D44 /* SeedHack */; };
 		10AF8EE62717D2BF00A293F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
 		10AF8EE72717D2C000A293F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10D358B12716E6BB00D48B76 /* Assets.xcassets */; };
 		10AF8EEC2717D46000A293F3 /* SeedHack in Frameworks */ = {isa = PBXBuildFile; productRef = 10AF8EEB2717D46000A293F3 /* SeedHack */; };
@@ -27,7 +46,6 @@
 		10D358D82716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358AF2716E6B900D48B76 /* SeedHackAppApp.swift */; };
 		10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358B02716E6B900D48B76 /* ContentView.swift */; };
 		10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358B02716E6B900D48B76 /* ContentView.swift */; };
-		10D358EE2716E6D000D48B76 /* SeedHack in Frameworks */ = {isa = PBXBuildFile; productRef = 10D358ED2716E6D000D48B76 /* SeedHack */; };
 		10D358F12716E71700D48B76 /* SearchSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F02716E71700D48B76 /* SearchSeedView.swift */; };
 		10D358F32716E72300D48B76 /* AnalyzeSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */; };
 		10D358F62716E79200D48B76 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358F52716E79200D48B76 /* SystemImage.swift */; };
@@ -54,6 +72,14 @@
 
 /* Begin PBXFileReference section */
 		1018E5612718488F00D21D44 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		1018E570271BA6C100D21D44 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		1018E578271BA9E500D21D44 /* SeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManager.swift; sourceTree = "<group>"; };
+		1018E57B271BB5AA00D21D44 /* 000000.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 000000.bin; sourceTree = "<group>"; };
+		1018E57E271BB5F500D21D44 /* RealmSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSeed.swift; sourceTree = "<group>"; };
+		1018E584271BD3EF00D21D44 /* 222122.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222122.bin; sourceTree = "<group>"; };
+		1018E587271BD4A900D21D44 /* 222422.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222422.bin; sourceTree = "<group>"; };
+		1018E588271BD4A900D21D44 /* 222322.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222322.bin; sourceTree = "<group>"; };
+		1018E589271BD4A900D21D44 /* 222522.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222522.bin; sourceTree = "<group>"; };
 		10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationStyle.swift; sourceTree = "<group>"; };
 		10D358AF2716E6B900D48B76 /* SeedHackAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedHackAppApp.swift; sourceTree = "<group>"; };
 		10D358B02716E6B900D48B76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,7 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10D358EE2716E6D000D48B76 /* SeedHack in Frameworks */,
+				1018E583271BB7C600D21D44 /* RealmSwift in Frameworks */,
+				1018E59B271BE1E600D21D44 /* SeedHack in Frameworks */,
+				1018E56F271BA68800D21D44 /* SWCompression in Frameworks */,
 				10D358F92716E9D500D48B76 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +138,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1018E566271BA27E00D21D44 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		10D358A92716E6B900D48B76 = {
 			isa = PBXGroup;
 			children = (
@@ -126,12 +161,20 @@
 		10D358AE2716E6B900D48B76 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1018E57B271BB5AA00D21D44 /* 000000.bin */,
+				1018E584271BD3EF00D21D44 /* 222122.bin */,
+				1018E588271BD4A900D21D44 /* 222322.bin */,
+				1018E587271BD4A900D21D44 /* 222422.bin */,
+				1018E589271BD4A900D21D44 /* 222522.bin */,
+				1018E566271BA27E00D21D44 /* Resource */,
 				10D358AF2716E6B900D48B76 /* SeedHackAppApp.swift */,
 				10D358B02716E6B900D48B76 /* ContentView.swift */,
 				10D358F42716E77E00D48B76 /* Enum */,
 				10D358EF2716E70700D48B76 /* Views */,
 				10D358B12716E6BB00D48B76 /* Assets.xcassets */,
 				10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */,
+				1018E578271BA9E500D21D44 /* SeedManager.swift */,
+				1018E57E271BB5F500D21D44 /* RealmSeed.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -186,6 +229,7 @@
 				10D358F02716E71700D48B76 /* SearchSeedView.swift */,
 				10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */,
 				1018E5612718488F00D21D44 /* DetailView.swift */,
+				1018E570271BA6C100D21D44 /* SettingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,8 +260,10 @@
 			);
 			name = "SeedHackApp (iOS)";
 			packageProductDependencies = (
-				10D358ED2716E6D000D48B76 /* SeedHack */,
 				10D358F82716E9D500D48B76 /* SwiftUIX */,
+				1018E56E271BA68800D21D44 /* SWCompression */,
+				1018E582271BB7C600D21D44 /* RealmSwift */,
+				1018E59A271BE1E600D21D44 /* SeedHack */,
 			);
 			productName = "SeedHackApp (iOS)";
 			productReference = 10D358B62716E6BB00D48B76 /* Seed Hack.app */;
@@ -317,6 +363,8 @@
 			mainGroup = 10D358A92716E6B900D48B76;
 			packageReferences = (
 				10D358F72716E9D500D48B76 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				1018E56D271BA68800D21D44 /* XCRemoteSwiftPackageReference "SWCompression" */,
+				1018E581271BB7C600D21D44 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 10D358B72716E6BB00D48B76 /* Products */;
 			projectDirPath = "";
@@ -336,6 +384,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				10AF8EE62717D2BF00A293F3 /* Assets.xcassets in Resources */,
+				1018E57C271BB5AA00D21D44 /* 000000.bin in Resources */,
+				1018E58E271BD4A900D21D44 /* 222522.bin in Resources */,
+				1018E585271BD3F000D21D44 /* 222122.bin in Resources */,
+				1018E58A271BD4A900D21D44 /* 222422.bin in Resources */,
+				1018E58C271BD4A900D21D44 /* 222322.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +397,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				10AF8EE72717D2C000A293F3 /* Assets.xcassets in Resources */,
+				1018E57D271BB5AA00D21D44 /* 000000.bin in Resources */,
+				1018E58F271BD4A900D21D44 /* 222522.bin in Resources */,
+				1018E586271BD3F000D21D44 /* 222122.bin in Resources */,
+				1018E58B271BD4A900D21D44 /* 222422.bin in Resources */,
+				1018E58D271BD4A900D21D44 /* 222322.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,14 +426,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1018E579271BA9E500D21D44 /* SeedManager.swift in Sources */,
 				10D358F32716E72300D48B76 /* AnalyzeSeedView.swift in Sources */,
 				1018E5622718488F00D21D44 /* DetailView.swift in Sources */,
 				10D358F12716E71700D48B76 /* SearchSeedView.swift in Sources */,
+				1018E571271BA6C100D21D44 /* SettingView.swift in Sources */,
 				10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358F62716E79200D48B76 /* SystemImage.swift in Sources */,
 				10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358FB2716F1CC00D48B76 /* Salmonid.swift in Sources */,
 				10D358D72716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */,
+				1018E57F271BB5F500D21D44 /* RealmSeed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,14 +444,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1018E57A271BA9E500D21D44 /* SeedManager.swift in Sources */,
 				10AF8EF32717D50600A293F3 /* SystemImage.swift in Sources */,
 				1018E5632718488F00D21D44 /* DetailView.swift in Sources */,
 				10AF8EF42717D50600A293F3 /* Salmonid.swift in Sources */,
+				1018E572271BA6C100D21D44 /* SettingView.swift in Sources */,
 				10AF8EED2717D4BA00A293F3 /* SearchSeedView.swift in Sources */,
 				10AF8EEE2717D4BA00A293F3 /* AnalyzeSeedView.swift in Sources */,
 				10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358D82716E6BB00D48B76 /* SeedHackAppApp.swift in Sources */,
+				1018E580271BB5F500D21D44 /* RealmSeed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +876,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1018E56D271BA68800D21D44 /* XCRemoteSwiftPackageReference "SWCompression" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tsolomko/SWCompression";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		1018E581271BB7C600D21D44 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = exactVersion;
+				version = 10.17.0;
+			};
+		};
 		10D358F72716E9D500D48B76 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
@@ -823,6 +903,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1018E56E271BA68800D21D44 /* SWCompression */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1018E56D271BA68800D21D44 /* XCRemoteSwiftPackageReference "SWCompression" */;
+			productName = SWCompression;
+		};
+		1018E582271BB7C600D21D44 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1018E581271BB7C600D21D44 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		1018E59A271BE1E600D21D44 /* SeedHack */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SeedHack;
+		};
 		10AF8EEB2717D46000A293F3 /* SeedHack */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SeedHack;
@@ -831,10 +925,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10D358F72716E9D500D48B76 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
-		};
-		10D358ED2716E6D000D48B76 /* SeedHack */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SeedHack;
 		};
 		10D358F82716E9D500D48B76 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -118,7 +118,6 @@ struct SearchSeedView: View {
                     self.mGameSeed = initialSeed
                 }
                 let ocean: Ocean = Ocean(mGameSeed: initialSeed)
-                ocean.getWaveInfo()
                 if ocean.mWave.map({ $0.eventType }) == eventType && ocean.mWave.map({ $0.waterLevel }) == waterLevel {
                     if maxAppear.contains(where: { $0 != -1}) {
                         let _ = ocean.mWave.map({ $0.getWaveArray() })
