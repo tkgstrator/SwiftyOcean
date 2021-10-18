@@ -7,9 +7,10 @@ final class SeedHackTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        benchmark("Benchmark") {
-            for mGameSeed in Range(0x00000000 ... 0x00100000) {
-                let _ = Ocean(mGameSeed: Int32(mGameSeed))
+        
+        benchmark("Initialize Random Number Generator") {
+            for mGameSeed in UInt32(0x00000000) ... UInt32(0x000FFFFF) {
+                let rnd = Random(seed: mGameSeed)
             }
         }
         Benchmark.main()
