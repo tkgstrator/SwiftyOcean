@@ -11,14 +11,14 @@ import SeedHack
 
 final class RealmSeed: Object {
     @Persisted(primaryKey: true) var mGameSeed: String
-    @Persisted var eventTypes: RealmSwift.List<Ocean.EventType>
-    @Persisted var waterLevels: RealmSwift.List<Ocean.WaterLevel>
-    @Persisted var bossSalmonids: RealmSwift.List<Int>
+    @Persisted var eventTypes: RealmSwift.List<EventType>
+    @Persisted var waterLevels: RealmSwift.List<WaterLevel>
+    @Persisted var bossSalmonids: RealmSwift.List<Int8>
     
     convenience init(mGameSeed: String) {
         self.init()
         self.mGameSeed = mGameSeed
-        let ocean: Ocean = Ocean(mGameSeed: Int32(mGameSeed, radix: 16)!)
+        let ocean: Ocean = Ocean(mGameSeed: UInt32(mGameSeed, radix: 16)!)
         self.eventTypes.append(objectsIn: ocean.mWave.map({ $0.eventType }))
         self.waterLevels.append(objectsIn: ocean.mWave.map({ $0.waterLevel }))
     }
@@ -31,14 +31,11 @@ final class RealmSeed: Object {
     }
 }
 
-extension Ocean.WaterLevel: PersistableEnum, RealmCollectionValue {
-    
+extension WaterLevel: PersistableEnum, RealmCollectionValue {
 }
 
-extension Ocean.EventType: PersistableEnum, RealmCollectionValue {
-    
+extension EventType: PersistableEnum, RealmCollectionValue {
 }
 
-extension Ocean.SalmonType: PersistableEnum, RealmCollectionValue {
-    
+extension SalmonType: PersistableEnum, RealmCollectionValue {
 }

@@ -11,7 +11,7 @@ import SeedHack
 import Benchmark
 
 struct SettingView: View {
-    let eventTypes: [SeedManager.FileType] = [.code(.rush), .code(.griller), .code(.fog), .code(.cohock)]
+    let eventTypes: [SeedManager.FileType] = [.code(.rush), .code(.griller), .code(.fog), .code(.mothership), .code(.noevents)]
     
     var body: some View {
         List {
@@ -26,16 +26,17 @@ struct SettingView: View {
             })
             Section(header: Text("Benchmark"), content: {
                 Button(action: {
-                    benchmark("Benchmark") {
-                        for mGameSeed in Range(0 ... Int16.max) {
-                            let ocean: Ocean = Ocean(mGameSeed: Int32(mGameSeed))
-                        }
-                    }
                     Benchmark.main()
                 }, label: {
                     Text("Run")
                 })
             })
+        }.onAppear {
+            benchmark("Benchmark") {
+                for mGameSeed in UInt32(0x00000) ... UInt32(0xFFFFF) {
+                    _ = Ocean(mGameSeed: UInt32(mGameSeed))
+                }
+            }
         }
     }
 }

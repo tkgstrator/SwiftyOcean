@@ -74,9 +74,9 @@ final class SeedManager {
     func addDefaultSeed(_ fileType: FileType) {
         SeedManager.shared.loadSeadList(fileType).sink(receiveCompletion: { completion in
         }, receiveValue: { response in
-            let lists = response.chunked(by: 10000)
+            let lists = response.chunked(by: 50000)
             for list in lists {
-                SeedManager.shared.save(list.map({ RealmSeed(ocean: Ocean(mGameSeed: Int64($0, radix: 16)!)) }))
+                SeedManager.shared.save(list.map({ RealmSeed(ocean: Ocean(mGameSeed: UInt32($0, radix: 16)!)) }))
             }
         })
             .store(in: &task)
@@ -102,7 +102,7 @@ final class SeedManager {
         }
         
         enum WaveEventCode: String, CaseIterable {
-            case noevents   = "-1"
+            case noevents   = "NoEvents"
             case hightide   = "202020"
             case lowtide    = "000000"
             case rush       = "222122"

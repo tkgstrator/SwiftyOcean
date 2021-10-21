@@ -11,7 +11,7 @@ import SeedHack
 
 struct AnalyzeSeedView: View {
     @State var initialSeed: String? = "0"
-    @ObservedObject var ocean: Ocean = Ocean(mGameSeed: 0)
+    @State var ocean: Ocean = Ocean(mGameSeed: 0)
     let alphabet: [String] = "0123456789ABCDEF".map({ String($0) })
     
     var body: some View {
@@ -23,7 +23,7 @@ struct AnalyzeSeedView: View {
                     }
                 })
                 Section(header: Text("Boss Salmonids"), content: {
-                    ForEach(Ocean.SalmonType.allCases) { salmonid in
+                    ForEach(SalmonType.allCases) { salmonid in
                         HStack(content: {
                             Text(salmonid.localized)
                             Spacer()
@@ -40,8 +40,7 @@ struct AnalyzeSeedView: View {
                         self.initialSeed = initialSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
                     }
                 }, onCommit: {
-                    if let initialSeed = initialSeed, let mGameSeed = Int64(initialSeed, radix: 16) {
-                        ocean.setGameSeed(mGameSeed: mGameSeed)
+                    if let initialSeed = initialSeed, let mGameSeed = UInt32(initialSeed, radix: 16) {
                     }
                 })
                     .keyboardType(.alphabet)
@@ -58,7 +57,7 @@ struct WaveInfo: View {
     
     init(wave: Ocean.Wave) {
         self.wave = wave
-        self.wave.getWaveArray()
+//        self.wave.getWaveArray()
     }
     
     var body: some View {
@@ -79,34 +78,34 @@ struct WaveDetail: View {
         switch wave.eventType {
             case .noevent, .fog, .cohockcharge:
                 ScrollView {
-                    ForEach(wave.mWaveUpdateEventArray) { wave in
-                        HStack(content: {
-                            Text(String(format: "%d", wave.appearType.rawValue))
-                            Spacer()
-                            LazyVGrid(columns: Array(repeating: .init(.fixed(50)), count: wave.salmonid.count), alignment: .trailing, spacing: nil, pinnedViews: [], content: {
-                                ForEach(wave.salmonid.indices) { index in
-                                    Image(wave.salmonid[index])
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                            })
-                        })
-                            .padding(.horizontal)
-                        Divider()
-                    }
+//                    ForEach(wave.mWaveUpdateEventArray) { wave in
+//                        HStack(content: {
+//                            Text(String(format: "%d", wave.appearType.rawValue))
+//                            Spacer()
+//                            LazyVGrid(columns: Array(repeating: .init(.fixed(50)), count: wave.salmonid.count), alignment: .trailing, spacing: nil, pinnedViews: [], content: {
+//                                ForEach(wave.salmonid.indices) { index in
+//                                    Image(wave.salmonid[index])
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                }
+//                            })
+//                        })
+//                            .padding(.horizontal)
+//                        Divider()
+//                    }
                 }
-                .navigationTitle("Wave \(wave.index + 1)")
+//                .navigationTitle("Wave \(wave.index + 1)")
             case .goldieseeking:
                 ScrollView {
-                    ForEach(wave.mGeyserArray) { geyser in
-                        HStack(content: {
-                            Text(alphabet[geyser.succ])
-                            Spacer()
-                            Text(alphabet[geyser.dest])
-                        })
-                            .padding(.horizontal)
-                        Divider()
-                    }
+//                    ForEach(wave.mGeyserArray) { geyser in
+//                        HStack(content: {
+//                            Text(alphabet[geyser.succ])
+//                            Spacer()
+//                            Text(alphabet[geyser.dest])
+//                        })
+//                            .padding(.horizontal)
+//                        Divider()
+//                    }
                 }
                 .navigationTitle("Geyser")
             default:
@@ -125,25 +124,26 @@ extension GeyserPosition: Identifiable {
     public var id: UUID { UUID() }
 }
 
-extension Ocean.SalmonType: Identifiable {
+extension SalmonType: Identifiable {
     public var id: UUID { UUID() }
 }
 
-extension Ocean.WaveUpdateEvent: Identifiable {
-    public var id: UUID { UUID() }
-}
+//extension Ocean.WaveUpdateEvent: Identifiable {
+//    public var id: UUID { UUID() }
+//}
 
 extension Ocean.Wave: Identifiable {
-    public var id: Int64 { mWaveSeed }
+    public var id: UInt32 { mWaveSeed }
 }
 
 extension Ocean {
-    var bossSalmonidAppearTotal: [Ocean.SalmonType] {
-        self.mWave.flatMap({ $0.mWaveUpdateEventArray.flatMap({ $0.salmonid })})
+    var bossSalmonidAppearTotal: [SalmonType] {
+        []
+//        self.mWave.flatMap({ $0.mWaveUpdateEventArray.flatMap({ $0.salmonid })})
     }
 }
 
-extension Ocean.SalmonType {
+extension SalmonType {
     var localized: String {
         switch self {
             case .shakebomber:
@@ -168,7 +168,7 @@ extension Ocean.SalmonType {
     }
 }
 
-extension Ocean.EventType {
+extension EventType {
     var localized: String {
         switch self {
             case .noevent:
@@ -189,7 +189,7 @@ extension Ocean.EventType {
     }
 }
 
-extension Ocean.SalmonType {
+extension SalmonType {
     var internalId: Int {
         switch self {
             case .shakebomber:
@@ -214,7 +214,7 @@ extension Ocean.SalmonType {
     }
 }
 
-extension Ocean.WaterLevel {
+extension WaterLevel {
     var localized: String {
         switch self {
             case .low:

@@ -16,10 +16,10 @@ public class Random {
     init() {}
     
     public init(seed: UInt32) {
-        self.mSeed1 = (0x6C078965 * (seed   ^ (seed   >> 30)) + 1)
-        self.mSeed2 = (0x6C078965 * (mSeed1 ^ (mSeed1 >> 30)) + 2)
-        self.mSeed3 = (0x6C078965 * (mSeed2 ^ (mSeed2 >> 30)) + 3)
-        self.mSeed4 = (0x6C078965 * (mSeed3 ^ (mSeed3 >> 30)) + 4)
+        self.mSeed1 = (0x6C078965 &* (seed   ^ (seed   >> 30)) + 1)
+        self.mSeed2 = (0x6C078965 &* (mSeed1 ^ (mSeed1 >> 30)) + 2)
+        self.mSeed3 = (0x6C078965 &* (mSeed2 ^ (mSeed2 >> 30)) + 3)
+        self.mSeed4 = (0x6C078965 &* (mSeed3 ^ (mSeed3 >> 30)) + 4)
     }
     
     @discardableResult
