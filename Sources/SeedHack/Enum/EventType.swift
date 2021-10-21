@@ -8,7 +8,7 @@
 import Foundation
 
 /// イベントの種類
-public enum EventType: UInt32, CaseIterable {
+public enum EventType: Int8, CaseIterable {
     case noevent        = 0
     case rush           = 1
     case goldieseeking  = 2
@@ -18,6 +18,7 @@ public enum EventType: UInt32, CaseIterable {
     case cohockcharge   = 6
     
     /// 重み
+    @inlinable
     var prob: UInt32 {
         switch self {
             case .noevent:

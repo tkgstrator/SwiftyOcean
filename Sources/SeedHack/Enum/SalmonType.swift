@@ -8,7 +8,7 @@
 import Foundation
 
 /// オオモノシャケの種類
-public enum SalmonType: UInt32, CaseIterable {
+public enum SalmonType: Int8, CaseIterable {
     case shakebomber    = 0
     case shakecup       = 1
     case shakeshield    = 2

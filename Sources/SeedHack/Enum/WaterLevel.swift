@@ -8,7 +8,7 @@
 import Foundation
 
 /// 潮位
-public enum WaterLevel: UInt32, CaseIterable {
+public enum WaterLevel: Int8, CaseIterable {
     /// 干潮
     case low    = 0
     /// 通常
@@ -17,6 +17,7 @@ public enum WaterLevel: UInt32, CaseIterable {
     case high   = 2
     
     /// 重み
+    @inlinable
     var prob: UInt32 {
         switch self {
             case .low:

@@ -58,7 +58,7 @@ extension Image {
         self.init(symbol.imageName, bundle: .main)
     }
     
-    init(_ symbol: Ocean.SalmonType) {
-        self.init(SalmonidType(rawValue: Int(symbol.internalId))!)
+    init(_ symbol: SalmonType) {
+        self.init(SalmonidType(rawValue: Int(symbol.rawValue))!)
     }
 }

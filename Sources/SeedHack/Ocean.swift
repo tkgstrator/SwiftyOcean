@@ -18,11 +18,14 @@ public final class Ocean: Random {
 //        [2, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 3, 3].compactMap({ UpdateType(rawValue: $0) }),
 //        [2, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0].compactMap({ UpdateType(rawValue: $0) })
 //    ]
+    static let eventTypes: [EventType] = [.noevent, .rush, .goldieseeking, .griller, .fog, .mothership, .cohockcharge]
+    static let waterLevels: [WaterLevel] = [.low, .middle, .high]
     
     public init(mGameSeed: UInt32) {
         self.mGameSeed = mGameSeed
         // 乱数生成器を初期化
         super.init(seed: mGameSeed)
+        self.mWave = getWaveInfo()
     }
     
     deinit {}
@@ -33,30 +36,32 @@ public final class Ocean: Random {
         
         // WAVE決定用の乱数生成器
         let rnd: Random = Random(seed: mGameSeed)
+        let mWaves: [UInt32] = [mGameSeed, getU32(), getU32()]
         var mWave: [Wave] = Array<Wave>()
         
-        for mWaveSeed in [mGameSeed, getU32(), getU32()] {
-            var sum: UInt32 = 0
+        for (index, mWaveSeed) in mWaves.enumerated() {
+            var mEventProb: UInt32 = 0
+            var mWaterProb: UInt32 = 0
             var mEventType: EventType = .noevent
             var mWaterLevel: WaterLevel = .low
             
-            for eventType in EventType.allCases {
-                if let wave = mWave.last, wave.eventType != .noevent && wave.eventType == eventType {
+            for eventType in Ocean.eventTypes  {
+                if index != 0 && mWave[index - 1].eventType != .noevent && mWave[index - 1].eventType == eventType {
                     continue
                 }
-                sum += eventType.prob
-                if (rnd.getU32() * sum) >> 0x20 < eventType.prob {
+                
+                mEventProb += eventType.prob
+                if (UInt64(rnd.getU32()) &* UInt64(mEventProb)) >> 0x20 < eventType.prob {
                     mEventType = eventType
                 }
             }
             
-            sum = 0
-            for waterLevel in WaterLevel.allCases {
-                if waterLevel == .low && [EventType.rush, EventType.goldieseeking, EventType.griller].contains(mEventType) {
+            for waterLevel in Ocean.waterLevels {
+                if waterLevel == .low && mEventType.rawValue >= 1 && mEventType.rawValue <= 3 {
                     continue
                 }
-                sum += waterLevel.prob
-                if (rnd.getU32() * sum) >> 0x20 < waterLevel.prob {
+                mWaterProb += waterLevel.prob
+                if (UInt64(rnd.getU32()) &* UInt64(mWaterProb)) >> 0x20 < waterLevel.prob {
                     mWaterLevel = mEventType == .cohockcharge ? .low : waterLevel
                 }
             }
