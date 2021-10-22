@@ -54,11 +54,11 @@ enum SalmonidType: Int, CaseIterable {
 }
 
 extension Image {
-    init(_ symbol: SalmonidType) {
+    private init(_ symbol: SalmonidType) {
         self.init(symbol.imageName, bundle: .main)
     }
     
     init(_ symbol: SalmonType) {
-        self.init(SalmonidType(rawValue: Int(symbol.rawValue))!)
+        self.init(SalmonidType(rawValue: Int(symbol.salmonid))!)
     }
 }

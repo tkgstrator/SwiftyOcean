@@ -31,6 +31,10 @@ final class RealmSeed: Object {
     }
 }
 
+extension RealmSeed: Identifiable {
+    var id: String { mGameSeed }
+}
+
 extension WaterLevel: PersistableEnum, RealmCollectionValue {
 }
 

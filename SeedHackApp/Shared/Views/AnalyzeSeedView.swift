@@ -19,7 +19,7 @@ struct AnalyzeSeedView: View {
             Form {
                 Section(header: Text("Wave"), content: {
                     ForEach(ocean.mWave) { wave in
-                        WaveInfo(wave: wave)
+                        WaveInfoView(wave: wave)
                     }
                 })
                 Section(header: Text("Boss Salmonids"), content: {
@@ -41,6 +41,8 @@ struct AnalyzeSeedView: View {
                     }
                 }, onCommit: {
                     if let initialSeed = initialSeed, let mGameSeed = UInt32(initialSeed, radix: 16) {
+                        ocean = Ocean(mGameSeed: mGameSeed)
+                        ocean.getWaveDetail()
                     }
                 })
                     .keyboardType(.alphabet)
@@ -52,16 +54,11 @@ struct AnalyzeSeedView: View {
     }
 }
 
-struct WaveInfo: View {
+struct WaveInfoView: View {
     let wave: Ocean.Wave
     
-    init(wave: Ocean.Wave) {
-        self.wave = wave
-//        self.wave.getWaveArray()
-    }
-    
     var body: some View {
-        NavigationLink(destination: WaveDetail(wave: wave), label: {
+        NavigationLink(destination: WaveDetailView(wave: wave), label: {
             VStack(alignment: .leading, content: {
                 Text(wave.waterLevel.localized)
                 Text(wave.eventType.localized)
@@ -70,7 +67,7 @@ struct WaveInfo: View {
     }
 }
 
-struct WaveDetail: View {
+struct WaveDetailView: View {
     let wave: Ocean.Wave
     let alphabet: [String] = "ABCDEFGHI".map({ String($0) })
     
@@ -78,34 +75,34 @@ struct WaveDetail: View {
         switch wave.eventType {
             case .noevent, .fog, .cohockcharge:
                 ScrollView {
-//                    ForEach(wave.mWaveUpdateEventArray) { wave in
-//                        HStack(content: {
-//                            Text(String(format: "%d", wave.appearType.rawValue))
-//                            Spacer()
-//                            LazyVGrid(columns: Array(repeating: .init(.fixed(50)), count: wave.salmonid.count), alignment: .trailing, spacing: nil, pinnedViews: [], content: {
-//                                ForEach(wave.salmonid.indices) { index in
-//                                    Image(wave.salmonid[index])
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fit)
-//                                }
-//                            })
-//                        })
-//                            .padding(.horizontal)
-//                        Divider()
-//                    }
+                    ForEach(wave.mWaveUpdateEventArray) { wave in
+                        HStack(content: {
+                            Text(String(format: "%d", wave.appearType.rawValue))
+                            Spacer()
+                            LazyVGrid(columns: Array(repeating: .init(.fixed(50)), count: wave.salmonid.count), alignment: .trailing, spacing: nil, pinnedViews: [], content: {
+                                ForEach(wave.salmonid.indices) { index in
+                                    Image(wave.salmonid[index])
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                            })
+                        })
+                            .padding(.horizontal)
+                        Divider()
+                    }
                 }
-//                .navigationTitle("Wave \(wave.index + 1)")
+                .navigationTitle("Wave")
             case .goldieseeking:
                 ScrollView {
-//                    ForEach(wave.mGeyserArray) { geyser in
-//                        HStack(content: {
-//                            Text(alphabet[geyser.succ])
-//                            Spacer()
-//                            Text(alphabet[geyser.dest])
-//                        })
-//                            .padding(.horizontal)
-//                        Divider()
-//                    }
+                    ForEach(wave.mGeyserArray) { geyser in
+                        HStack(content: {
+                            Text(alphabet[geyser.succ])
+                            Spacer()
+                            Text(alphabet[geyser.dest])
+                        })
+                            .padding(.horizontal)
+                        Divider()
+                    }
                 }
                 .navigationTitle("Geyser")
             default:
@@ -128,9 +125,9 @@ extension SalmonType: Identifiable {
     public var id: UUID { UUID() }
 }
 
-//extension Ocean.WaveUpdateEvent: Identifiable {
-//    public var id: UUID { UUID() }
-//}
+extension Ocean.WaveUpdateEvent: Identifiable {
+    public var id: UUID { UUID() }
+}
 
 extension Ocean.Wave: Identifiable {
     public var id: UInt32 { mWaveSeed }
@@ -138,8 +135,7 @@ extension Ocean.Wave: Identifiable {
 
 extension Ocean {
     var bossSalmonidAppearTotal: [SalmonType] {
-        []
-//        self.mWave.flatMap({ $0.mWaveUpdateEventArray.flatMap({ $0.salmonid })})
+        self.mWave.flatMap({ $0.mWaveUpdateEventArray.flatMap({ $0.salmonid })})
     }
 }
 

@@ -22,7 +22,7 @@ struct DetailView: View {
         Form {
             Section(header: Text("Wave"), content: {
                 ForEach(ocean.mWave) { wave in
-                    WaveInfo(wave: wave)
+                    WaveInfoView(wave: wave)
                 }
             })
             Section(header: Text("Boss Salmonids"), content: {

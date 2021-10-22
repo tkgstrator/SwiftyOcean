@@ -38,6 +38,8 @@
 		10AF8EF42717D50600A293F3 /* Salmonid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358FA2716F1CC00D48B76 /* Salmonid.swift */; };
 		10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */; };
 		10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */; };
+		10BA140D272271A800348DD3 /* SearchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140C272271A800348DD3 /* SearchStyle.swift */; };
+		10BA140E272271A800348DD3 /* SearchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140C272271A800348DD3 /* SearchStyle.swift */; };
 		10D358C82716E6BB00D48B76 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C72716E6BB00D48B76 /* Tests_iOS.swift */; };
 		10D358CA2716E6BB00D48B76 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C92716E6BB00D48B76 /* Tests_iOSLaunchTests.swift */; };
 		10D358D42716E6BB00D48B76 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358D32716E6BB00D48B76 /* Tests_macOS.swift */; };
@@ -81,6 +83,7 @@
 		1018E588271BD4A900D21D44 /* 222322.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222322.bin; sourceTree = "<group>"; };
 		1018E589271BD4A900D21D44 /* 222522.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222522.bin; sourceTree = "<group>"; };
 		10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationStyle.swift; sourceTree = "<group>"; };
+		10BA140C272271A800348DD3 /* SearchStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStyle.swift; sourceTree = "<group>"; };
 		10D358AF2716E6B900D48B76 /* SeedHackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedHackApp.swift; sourceTree = "<group>"; };
 		10D358B02716E6B900D48B76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		10D358B12716E6BB00D48B76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 			children = (
 				10D358F52716E79200D48B76 /* SystemImage.swift */,
 				10D358FA2716F1CC00D48B76 /* Salmonid.swift */,
+				10BA140C272271A800348DD3 /* SearchStyle.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -433,6 +437,7 @@
 				1018E571271BA6C100D21D44 /* SettingView.swift in Sources */,
 				10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358F62716E79200D48B76 /* SystemImage.swift in Sources */,
+				10BA140D272271A800348DD3 /* SearchStyle.swift in Sources */,
 				10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358FB2716F1CC00D48B76 /* Salmonid.swift in Sources */,
 				10D358D72716E6BB00D48B76 /* SeedHackApp.swift in Sources */,
@@ -451,6 +456,7 @@
 				1018E572271BA6C100D21D44 /* SettingView.swift in Sources */,
 				10AF8EED2717D4BA00A293F3 /* SearchSeedView.swift in Sources */,
 				10AF8EEE2717D4BA00A293F3 /* AnalyzeSeedView.swift in Sources */,
+				10BA140E272271A800348DD3 /* SearchStyle.swift in Sources */,
 				10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358D82716E6BB00D48B76 /* SeedHackApp.swift in Sources */,
