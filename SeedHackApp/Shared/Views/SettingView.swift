@@ -7,10 +7,12 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
 import SeedHack
 import Benchmark
 
 struct SettingView: View {
+    @ObservedResults(RealmSeed.self, sortDescriptor: SortDescriptor(keyPath: "mGameSeed", ascending: true)) var results
     let eventTypes: [SeedManager.FileType] = [.code(.rush), .code(.griller), .code(.fog), .code(.mothership), .code(.noevents)]
     
     var body: some View {
@@ -23,6 +25,13 @@ struct SettingView: View {
                         Text("Load \(fileType.rawValue).bin")
                     })
                 }
+            })
+            Section(header: Text("Database"), content: {
+                HStack(content: {
+                    Text("Records")
+                    Spacer()
+                    Text("\(results.count)")
+                })
             })
             Section(header: Text("Benchmark"), content: {
                 Button(action: {

@@ -22,8 +22,26 @@ public enum SalmonType: Int8, CaseIterable {
     /// 重み
     var prob: UInt32 { 1 }
     
-    /// 通常オオモノ
-    public static var normalCases: [SalmonType] {
-        [.shakebomber, .shakecup, .shakeshield, .shakesnake, .shaketower, .shakediver, .shakerocket]
+    public var salmonid: Int8 {
+        switch self {
+            case .shakegoldie:
+                return 3
+            case .shakebomber:
+                return 6
+            case .shakecup:
+                return 9
+            case .shakeshield:
+                return 12
+            case .shakesnake:
+                return 13
+            case .shaketower:
+                return 14
+            case .shakediver:
+                return 15
+            case .shakedozer:
+                return 16
+            case .shakerocket:
+                return 19
+        }
     }
 }
