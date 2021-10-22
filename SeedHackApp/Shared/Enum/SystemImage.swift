@@ -18,6 +18,7 @@ enum SystemImage: String, CaseIterable {
     case search     = "magnifyingglass"
     case analyze    = "pencil"
     case setting    = "gearshape"
+    case plus       = "plus.circle"
 }
 
 extension Image {

@@ -16,6 +16,7 @@ struct DetailView: View {
     init(mGameSeed: UInt32) {
         self.mGameSeed = String(format: "%08X", mGameSeed)
         self.ocean = Ocean(mGameSeed: mGameSeed)
+        self.ocean.getWaveDetail()
     }
     
     var body: some View {
@@ -26,17 +27,22 @@ struct DetailView: View {
                 }
             })
             Section(header: Text("Boss Salmonids"), content: {
-//                ForEach(SalmonType.allCases) { salmonid in
-//                    HStack(content: {
-//                        Text(salmonid.localized)
-//                        Spacer()
-//                        Text("\(ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count)")
-//                            .foregroundColor(.secondary)
-//                    })
-//                }
+                ForEach(SalmonType.allCases) { salmonid in
+                    HStack(content: {
+                        Text(salmonid.localized)
+                        Spacer()
+                        Text("\(ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count)")
+                            .foregroundColor(.secondary)
+                    })
+                }
             })
         }
         .navigationTitle(mGameSeed)
+        .toolbar(content: {
+            ToolbarItemGroup {
+                SaveButton(mGameSeed: mGameSeed)
+            }
+        })
         .font(.system(.body, design: .monospaced))
     }
 }

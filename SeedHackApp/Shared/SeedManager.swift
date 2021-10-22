@@ -10,8 +10,9 @@ import RealmSwift
 import SWCompression
 import Combine
 import SeedHack
+import SwiftUI
 
-final class SeedManager {
+final class SeedManager: ObservableObject {
     private init() {
         let schemeVersion: UInt64 = 0
         do {
@@ -28,6 +29,7 @@ final class SeedManager {
     private var task = Set<AnyCancellable>()
     
     static let shared: SeedManager = SeedManager()
+    @Published var binaryFiles: [LoadSeedType] = []
     
     private func save<T: Object>(_ objects: [T]) {
         if realm.isInWriteTransaction {
@@ -43,8 +45,28 @@ final class SeedManager {
         }
     }
     
-    private func save<T: Object>(_ object: T) {
+    func object<T: Object>(_ type: T.Type, forPrimaryKey key: String?) -> T? {
+        realm.object(ofType: type, forPrimaryKey: key)
+    }
+    
+    func objects<T: Object>(_ type: T.Type) -> Results<T> {
+        realm.objects(type)
+    }
+    
+    func save<T: Object>(_ object: T) {
         self.save([object])
+    }
+    
+    func updateMemo<T: Object>(_ object: T, memo: String) {
+        if let object = object as? RealmSeed {
+            if realm.isInWriteTransaction {
+                object.mTitle = memo
+            } else {
+                realm.beginWrite()
+                object.mTitle = memo
+                try? realm.commitWrite()
+            }
+        }
     }
     
     private func loadSeadList(_ type: FileType) -> AnyPublisher<[String], APPError> {
@@ -82,6 +104,15 @@ final class SeedManager {
             .store(in: &task)
     }
     
+    class LoadSeedType: Identifiable {
+        internal init(fileType: FileType.WaveEventCode) {
+            self.fileType = fileType
+            self.enabled = UserDefaults.standard.bool(forKey: "INITIAL_SEED_\(fileType.rawValue.capitalized)")
+        }
+        
+        let fileType: FileType.WaveEventCode
+        let enabled: Bool
+    }
     
     enum FileType {
         public enum Package {
@@ -90,6 +121,7 @@ final class SeedManager {
         }
         
         case code(WaveEventCode)
+        case event(Event)
         
         enum Event: Int, CaseIterable {
             case noevent
@@ -123,7 +155,6 @@ final class SeedManager {
     }
     
 }
-
 
 enum APPError: Int, Error, CaseIterable {
     /// ファイルが存在しない
