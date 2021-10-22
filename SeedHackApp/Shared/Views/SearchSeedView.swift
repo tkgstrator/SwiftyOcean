@@ -55,27 +55,30 @@ struct SearchSeedView: View {
                     })
                 }
                 .font(.system(.body, design: .monospaced))
-                HStack(content: {
-                    Button(action: {
-                        switch searchStyle {
+                Section(header: Text("Search"), content: {
+                    HStack(content: {
+                        Button(action: {
+                            switch searchStyle {
                             case .exhaustion:
                                 findExhaustionSeed()
                             case .database:
                                 findDatabaseSeed()
-                        }
-                    }, label: {
-                        Text("Find")
+                            }
+                        }, label: {
+                            Text("Find")
+                        })
+                        Spacer()
+                        Text("\(seeds.count)")
+                            .foregroundColor(.secondary)
                     })
-                    Spacer()
-                    Text("\(seeds.count)")
-                        .foregroundColor(.secondary)
+                        .font(.system(.body, design: .monospaced))
+                    NavigationLink(destination: ResultView, label: {
+                        Text("Result")
+                    })
+                    ProgressView(value: Double(mGameSeed) / Double(maxLength))
+                        .progressViewStyle(DarkBlueShadowProgressViewStyle())
+                    
                 })
-                    .font(.system(.body, design: .monospaced))
-                NavigationLink(destination: ResultView, label: {
-                    Text("Result")
-                })
-                ProgressView(value: Double(mGameSeed) / Double(maxLength))
-                    .progressViewStyle(DarkBlueShadowProgressViewStyle())
             }
             .navigationBarItems(trailing: SettingButton)
             .navigationTitle("Find Seed")
@@ -132,8 +135,9 @@ struct SearchSeedView: View {
     private func findDatabaseSeed() {
         let eventTypes: [Int8] = eventType.map({ $0.rawValue })
         let waterLevels: [Int8] = waterLevel.map({ $0.rawValue })
-        $results.filter = NSPredicate("", valuesIn: <#T##[Int]#>)
-        print(results.count)
+        let mWave: String = zip(waterLevels, eventTypes).map({ String(format: "%02d", $0.0 * 10 + $0.1) }).joined()
+        $results.filter = NSPredicate(format: "mWave=%@", argumentArray: [mWave])
+        seeds = results.compactMap({ UInt32($0.mGameSeed, radix: 16) })
     }
     
     private func findExhaustionSeed() {
