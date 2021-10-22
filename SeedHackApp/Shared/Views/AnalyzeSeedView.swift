@@ -48,6 +48,11 @@ struct AnalyzeSeedView: View {
                     .keyboardType(.alphabet)
             })
             .navigationTitle("Analyze Seed")
+            .toolbar(content: {
+                ToolbarItemGroup {
+                    SaveButton(mGameSeed: initialSeed ?? "00000000")
+                }
+            })
         }
         .font(.system(.body, design: .monospaced))
         .navigationViewStyle(SplitNavigationViewStyle())

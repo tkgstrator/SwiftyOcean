@@ -40,6 +40,10 @@
 		10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */; };
 		10BA140D272271A800348DD3 /* SearchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140C272271A800348DD3 /* SearchStyle.swift */; };
 		10BA140E272271A800348DD3 /* SearchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140C272271A800348DD3 /* SearchStyle.swift */; };
+		10BA14102722F0BB00348DD3 /* SavedSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140F2722F0BB00348DD3 /* SavedSeedView.swift */; };
+		10BA14112722F0BB00348DD3 /* SavedSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA140F2722F0BB00348DD3 /* SavedSeedView.swift */; };
+		10BA14132722F3FD00348DD3 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA14122722F3FD00348DD3 /* SaveButton.swift */; };
+		10BA14142722F3FD00348DD3 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BA14122722F3FD00348DD3 /* SaveButton.swift */; };
 		10D358C82716E6BB00D48B76 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C72716E6BB00D48B76 /* Tests_iOS.swift */; };
 		10D358CA2716E6BB00D48B76 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358C92716E6BB00D48B76 /* Tests_iOSLaunchTests.swift */; };
 		10D358D42716E6BB00D48B76 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358D32716E6BB00D48B76 /* Tests_macOS.swift */; };
@@ -84,6 +88,8 @@
 		1018E589271BD4A900D21D44 /* 222522.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = 222522.bin; sourceTree = "<group>"; };
 		10AF8EF52717D61C00A293F3 /* SplitNavigationStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationStyle.swift; sourceTree = "<group>"; };
 		10BA140C272271A800348DD3 /* SearchStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStyle.swift; sourceTree = "<group>"; };
+		10BA140F2722F0BB00348DD3 /* SavedSeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSeedView.swift; sourceTree = "<group>"; };
+		10BA14122722F3FD00348DD3 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		10D358AF2716E6B900D48B76 /* SeedHackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedHackApp.swift; sourceTree = "<group>"; };
 		10D358B02716E6B900D48B76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		10D358B12716E6BB00D48B76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -233,6 +239,8 @@
 				10D358F22716E72300D48B76 /* AnalyzeSeedView.swift */,
 				1018E5612718488F00D21D44 /* DetailView.swift */,
 				1018E570271BA6C100D21D44 /* SettingView.swift */,
+				10BA140F2722F0BB00348DD3 /* SavedSeedView.swift */,
+				10BA14122722F3FD00348DD3 /* SaveButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,6 +446,8 @@
 				10D358D92716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358F62716E79200D48B76 /* SystemImage.swift in Sources */,
 				10BA140D272271A800348DD3 /* SearchStyle.swift in Sources */,
+				10BA14132722F3FD00348DD3 /* SaveButton.swift in Sources */,
+				10BA14102722F0BB00348DD3 /* SavedSeedView.swift in Sources */,
 				10AF8EF62717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358FB2716F1CC00D48B76 /* Salmonid.swift in Sources */,
 				10D358D72716E6BB00D48B76 /* SeedHackApp.swift in Sources */,
@@ -457,6 +467,8 @@
 				10AF8EED2717D4BA00A293F3 /* SearchSeedView.swift in Sources */,
 				10AF8EEE2717D4BA00A293F3 /* AnalyzeSeedView.swift in Sources */,
 				10BA140E272271A800348DD3 /* SearchStyle.swift in Sources */,
+				10BA14142722F3FD00348DD3 /* SaveButton.swift in Sources */,
+				10BA14112722F0BB00348DD3 /* SavedSeedView.swift in Sources */,
 				10AF8EF72717D61C00A293F3 /* SplitNavigationStyle.swift in Sources */,
 				10D358DA2716E6BB00D48B76 /* ContentView.swift in Sources */,
 				10D358D82716E6BB00D48B76 /* SeedHackApp.swift in Sources */,
@@ -616,7 +628,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -647,7 +659,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

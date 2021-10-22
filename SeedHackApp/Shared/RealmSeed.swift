@@ -15,6 +15,7 @@ final class RealmSeed: Object {
     @Persisted var waterLevels: RealmSwift.List<WaterLevel>
     @Persisted var bossSalmonids: RealmSwift.List<Int8>
     @Persisted var mWave: String
+    @Persisted var mTitle: String?
 
     convenience init(mGameSeed: String) {
         self.init()
@@ -23,6 +24,11 @@ final class RealmSeed: Object {
         self.eventTypes.append(objectsIn: ocean.mWave.map({ $0.eventType }))
         self.waterLevels.append(objectsIn: ocean.mWave.map({ $0.waterLevel }))
         self.mWave = zip(waterLevels, eventTypes).map({ String(format: "%02d", $0.0.rawValue * 10 + $0.1.rawValue) }).joined()
+    }
+    
+    convenience init(mGameSeed: String, memo mTitle: String) {
+        self.init(mGameSeed: mGameSeed)
+        self.mTitle = mTitle
     }
     
     convenience init(ocean: Ocean) {
