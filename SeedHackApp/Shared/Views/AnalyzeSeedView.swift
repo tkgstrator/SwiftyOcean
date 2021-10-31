@@ -10,47 +10,64 @@ import SwiftUIX
 import SeedHack
 
 struct AnalyzeSeedView: View {
-    @State var initialSeed: String? = "0"
+    @State var initialSeed: String = "0"
     @State var ocean: Ocean = Ocean(mGameSeed: 0)
+    @State var arm64: String = ""
     let alphabet: [String] = "0123456789ABCDEF".map({ String($0) })
     
     var body: some View {
         NavigationView {
             Form {
+                Section(header: Text("IPSwitch"), content: {
+                    Button(action: {
+                        UIPasteboard.general.setValue(arm64, forPasteboardType: "public.plain-text")
+                    }, label: {
+                        HStack(content: {
+                            Spacer()
+                            Text(arm64)
+                                .foregroundColor(.secondary)
+                        })
+                    })
+                })
                 Section(header: Text("Wave"), content: {
                     ForEach(ocean.mWave) { wave in
                         WaveInfoView(wave: wave)
                     }
                 })
-                Section(header: Text("Boss Salmonids"), content: {
-                    ForEach(SalmonType.allCases) { salmonid in
-                        HStack(content: {
-                            Text(salmonid.localized)
-                            Spacer()
-                            Text("\(ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count)")
-                                .foregroundColor(.secondary)
-                        })
-                    }
-                })
             }
-            .navigationSearchBar({
-                SearchBar("Input the initial seed", text: $initialSeed, onEditingChanged: { _ in
-                    // 数字以外があれば全て数字に変換する
-                    if let initialSeed = initialSeed {
-                        self.initialSeed = initialSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
-                    }
-                }, onCommit: {
-                    if let initialSeed = initialSeed, let mGameSeed = UInt32(initialSeed, radix: 16) {
-                        ocean = Ocean(mGameSeed: mGameSeed)
-                        ocean.getWaveDetail()
-                    }
-                })
-                    .keyboardType(.alphabet)
+            .searchable(text: $initialSeed, placement: .navigationBarDrawer, prompt: "Input the initial seed")
+            .onChange(of: initialSeed, perform: { mGameSeed in
+                self.initialSeed = mGameSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
+                if let mGameSeed = UInt32(initialSeed, radix: 16) {
+                    ocean = Ocean(mGameSeed: mGameSeed)
+                    Converter.convert(self.initialSeed, completion: { result in
+                        switch result {
+                            case .success(let value):
+                                self.arm64 = value
+                            case .failure(let error):
+                                print(error)
+                        }
+                    })
+                }
             })
+            .onAppear {
+                if let mGameSeed = UInt32(initialSeed, radix: 16) {
+                    ocean = Ocean(mGameSeed: mGameSeed)
+                    ocean.getWaveDetail()
+                    Converter.convert(self.initialSeed, completion: { result in
+                        switch result {
+                            case .success(let value):
+                                self.arm64 = value
+                            case .failure(let error):
+                                print(error)
+                        }
+                    })
+                }
+            }
             .navigationTitle("Analyze Seed")
             .toolbar(content: {
                 ToolbarItemGroup {
-                    SaveButton(mGameSeed: initialSeed ?? "00000000")
+                    SaveButton(mGameSeed: initialSeed)
                 }
             })
         }
