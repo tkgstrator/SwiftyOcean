@@ -69,6 +69,10 @@ final class SeedManager: ObservableObject {
         }
     }
     
+    func deleteAll() {
+        realm.deleteAll()
+    }
+    
     private func loadSeadList(_ type: FileType) -> AnyPublisher<[String], APPError> {
         Deferred {
             Future { promise in
@@ -139,9 +143,9 @@ final class SeedManager: ObservableObject {
             case lowtide    = "000000"
             case rush       = "222122"
             case griller    = "222322"
-            case fog        = "222422"
+            case lowfog     = "220422"
+            case highfog    = "222422"
             case mothership = "222522"
-            case cohock     = "222622"
         }
         
         public var rawValue: String {

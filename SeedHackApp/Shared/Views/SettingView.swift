@@ -16,8 +16,8 @@ struct SettingView: View {
     @EnvironmentObject var  manager: SeedManager
     @ObservedResults(RealmSeed.self, sortDescriptor: SortDescriptor(keyPath: "mGameSeed", ascending: true)) var results
     
-    @State var eventTypes: [SeedManager.FileType] = [.code(.rush), .code(.griller), .code(.fog), .code(.mothership), .code(.noevents)]
-    @AppStorage("INITIAL_LOADED_SEED") var loadedFlag: [Bool] = Array(repeating: false, count: 5)
+    @State var eventTypes: [SeedManager.FileType] = [.code(.rush), .code(.griller), .code(.lowfog), .code(.highfog), .code(.mothership), .code(.noevents)]
+    @AppStorage("INITIAL_LOADED_SEED") var loadedFlag: [Bool] = Array(repeating: false, count: 30)
     
     var body: some View {
         NavigationView {
@@ -49,7 +49,8 @@ struct SettingView: View {
                         Text("Benchmark")
                     })
                     Button(action: {
-                        loadedFlag = Array(repeating: false, count: 5)
+                        loadedFlag = Array(repeating: false, count: 30)
+                        SeedManager.shared.deleteAll()
                     }, label: {
                         Text("Reset")
                     })
@@ -63,6 +64,7 @@ struct SettingView: View {
             }
             .navigationTitle("Setting")
         }
+        .navigationViewStyle(SplitNavigationViewStyle())
     }
 }
 
