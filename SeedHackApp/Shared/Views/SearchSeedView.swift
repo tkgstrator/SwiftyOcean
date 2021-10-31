@@ -16,6 +16,7 @@ struct SearchSeedView: View {
     @State var eventType: [EventType] = Array(repeating: .noevent, count: 3)
     @State var seeds: [UInt32] = []
     @State var isPresented: Bool = false
+    @AppStorage("APP_SEARCH_FIRST_INDEX") var firstIndex: Int = 0
     @AppStorage("APP_SEARCH_MAX_LENGTH") var maxLength: Int = 65536
     @State var maxAppear: [Int] = Array(repeating: -1, count: 7)
     @State var mGameSeed: UInt32 = 0
@@ -23,7 +24,7 @@ struct SearchSeedView: View {
     let mShakeTypes: [SalmonType] = [.shakebomber, .shakecup, .shakeshield, .shakesnake, .shaketower, .shakediver, .shakerocket]
     
     let appearLength: [Int] = Range(-1 ... 20).map({ $0 })
-    let length: [Int] = Range(16 ... 32).map({ Int(pow(2, Double($0))) })
+    let length: [Int] = [0] + Range(16 ... 32).map({ Int(pow(2, Double($0))) })
     
     var body: some View {
         NavigationView {
@@ -107,11 +108,19 @@ struct SearchSeedView: View {
             .sheet(isPresented: $isPresented, onDismiss: {}, content: {
                 NavigationView {
                     Form {
-                        Section(header: "Global", content: {
-                            Picker(selection: $maxLength, label: Text("Max length")) {
+                        Section(header: "Search Length", content: {
+                            Picker(selection: $firstIndex, label: Text("First Index")) {
                                 ForEach(length, id:\.self) { length in
                                     Text("\(length)")
                                         .tag(length)
+                                }
+                            }
+                            Picker(selection: $maxLength, label: Text("Last Index")) {
+                                ForEach(length, id:\.self) { length in
+                                    if length > firstIndex {
+                                        Text("\(length)")
+                                            .tag(length)
+                                    }
                                 }
                             }
                         })
@@ -136,20 +145,35 @@ struct SearchSeedView: View {
         let eventTypes: [Int8] = eventType.map({ $0.rawValue })
         let waterLevels: [Int8] = waterLevel.map({ $0.rawValue })
         let mWave: String = zip(waterLevels, eventTypes).map({ String(format: "%02d", $0.0 * 10 + $0.1) }).joined()
+        var searchSeeds: [UInt32] = Array<UInt32>()
         $results.filter = NSPredicate(format: "mWave=%@", argumentArray: [mWave])
-        seeds = results.compactMap({ UInt32($0.mGameSeed, radix: 16) })
+        for result in results {
+            let mGameSeed: UInt32 = UInt32(result.mGameSeed, radix: 16)!
+            let ocean: Ocean = Ocean(mGameSeed: mGameSeed)
+            if maxAppear.contains(where: { $0 != -1}) {
+                /// 詳細データを検索
+                ocean.getWaveDetail()
+                let appearCount: [Int] = mShakeTypes.map({ salmonid in ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count })
+                if !zip(appearCount, maxAppear).map({ $1 == -1 ? true : $0 <= $1 }).contains(false) {
+                    searchSeeds.append(mGameSeed)
+                }
+            } else {
+                searchSeeds.append(mGameSeed)
+            }
+        }
+        seeds = searchSeeds
     }
     
     private func findExhaustionSeed() {
         seeds.removeAll(keepingCapacity: true)
-        var results: [UInt32] = Array<UInt32>()
+        var searchSeeds: [UInt32] = Array<UInt32>()
         
         DispatchQueue(label: "FIND SEED").async {
-            for initialSeed in Range(0 ... UInt32(maxLength)) {
+            for initialSeed in Range(UInt32(firstIndex) ... UInt32(firstIndex + maxLength)) {
                 if initialSeed & 0x00000FFF == 0x00000000 {
                     DispatchQueue.main.async {
                         mGameSeed = initialSeed
-                        seeds = results
+                        seeds = searchSeeds
                     }
                 }
                 
@@ -160,17 +184,17 @@ struct SearchSeedView: View {
                         ocean.getWaveDetail()
                         let appearCount: [Int] = mShakeTypes.map({ salmonid in ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count })
                         if !zip(appearCount, maxAppear).map({ $1 == -1 ? true : $0 <= $1 }).contains(false) {
-                            results.append(initialSeed)
+                            searchSeeds.append(initialSeed)
                         }
                     } else {
-                        results.append(initialSeed)
+                        searchSeeds.append(initialSeed)
                     }
                 }
             }
             /// 最後に調整する
             DispatchQueue.main.async {
                 mGameSeed = UInt32(maxLength)
-                seeds = results
+                seeds = searchSeeds
             }
         }
     }
