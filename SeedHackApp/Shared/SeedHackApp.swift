@@ -16,7 +16,6 @@ struct SeedHackApp: App {
             ContentView()
         }
     }
-    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
