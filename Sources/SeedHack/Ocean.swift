@@ -109,7 +109,6 @@ public final class Ocean: Random {
         
         private func getEnemyArray(mWaveNum: Int) -> [WaveUpdateEvent] {
             let mWaveArray: [UpdateType] = Ocean.mWaveArray[mWaveNum]
-            print(mWaveArray)
             let rnd: Random = Random(seed: self.mWaveSeed)
             rnd.getU32()
 
@@ -124,7 +123,6 @@ public final class Ocean: Random {
                         // 一回無駄に消化
                         let appearId = getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)
                         mEnemyAppearId.append(AppearType(rawValue: appearId)!)
-                        print(appearId)
                         break
                     case .change:
                         guard let appearId: AppearType = AppearType(rawValue: getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)) else { return [] }
@@ -149,7 +147,6 @@ public final class Ocean: Random {
                         break
                 }
             }
-            print(mEnemyAppearId)
             return mWaveEventArray
         }
 
@@ -210,7 +207,6 @@ public final class Ocean: Random {
             var w6: Int8 = 3
             var id: Int8 = lastAppearId
             
-            print(lastAppearId != -1, (Int64(lastAppearId) & 0x80000000))
             if lastAppearId != -1 {
                 w8 = UInt64(w6 - 1)
                 while true {
@@ -247,17 +243,14 @@ public final class Ocean: Random {
                     id = x11
                 }
                 if ((x12 & 7) != 5 && ((x12 & 7) != 0)) {
-                    print("Break")
                     break
                 }
                 x6 -= 1
                 x7 = x7.advanced(by: 1)
                 if (!x6) {
-                    print("Return V5")
                     return v5
                 }
             }
-            print("Return ID")
             return id
         }
     }
