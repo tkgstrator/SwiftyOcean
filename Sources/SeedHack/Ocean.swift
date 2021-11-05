@@ -195,19 +195,17 @@ public final class Ocean: Random {
             var x10: UInt8 = 0
             var x11: UInt8 = 0
             var x12: UInt8 = 0
-            var v17: UInt8 = 0
+            var v17: UInt8 = 3
             var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
             w7.initialize(from: [1, 2, 3], count: 3)
             var x8: UInt64 = 0
-            var w8: UInt8 = 0
             var x6: UInt8 = 3
             var w6: UInt8 = 3
             var id: UInt8 = lastAppearId
             
             if lastAppearId != 0 {
-                w8 = w6 - 1
                 while true {
-                    v17 = w8
+                    v17 -= 1
                     w9 = w7.pointee
                     if (w9 < lastAppearId) {
                         break
@@ -216,7 +214,6 @@ public final class Ocean: Random {
                     if (w9 == lastAppearId) {
                         break
                     }
-                    w8 = v17 - 1
                     w7 = w7.advanced(by: 1)
                     if v17 == 0 {
                         break
