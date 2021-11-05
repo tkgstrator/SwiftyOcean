@@ -8,7 +8,7 @@ final class SeedHackTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
         
-        let mAppearIds: [[Int8]] = [
+        let mAppearIds: [[UInt8]] = [
             [2, 2, 1, 3, 1, 2, 2, 2],
             [2, 1, 3, 3, 3, 2, 2, 2],
             [1, 2, 3, 1, 2, 1, 3, 2],
@@ -32,7 +32,7 @@ final class SeedHackTests: XCTestCase {
             ocean.getWaveDetail()
             
             let wave = ocean.mWave[0]
-            let mAppearId: [Int8] = wave.mWaveUpdateEventArray.map({ $0.appearType.rawValue })
+            let mAppearId: [UInt8] = wave.mWaveUpdateEventArray.map({ $0.appearType.rawValue })
             print(mAppearId)
             XCTAssertEqual(mAppearId, mAppearIds[Int(mGameSeed)])
         }
