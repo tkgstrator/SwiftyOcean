@@ -34,12 +34,23 @@ struct AnalyzeSeedView: View {
                         WaveInfoView(wave: wave)
                     }
                 })
+                Section(header: Text("Boss Salmonids"), content: {
+                    ForEach(SalmonType.allCases) { salmonid in
+                        HStack(content: {
+                            Text(salmonid.localized)
+                            Spacer()
+                            Text("\(ocean.bossSalmonidAppearTotal.filter({ $0 == salmonid }).count)")
+                                .foregroundColor(.secondary)
+                        })
+                    }
+                })
             }
             .searchable(text: $initialSeed, placement: .navigationBarDrawer, prompt: "Input the initial seed")
             .onChange(of: initialSeed, perform: { mGameSeed in
                 self.initialSeed = mGameSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
                 if let mGameSeed = UInt32(initialSeed, radix: 16) {
                     ocean = Ocean(mGameSeed: mGameSeed)
+                    ocean.getWaveDetail()
                     Converter.convert(self.initialSeed, completion: { result in
                         switch result {
                             case .success(let value):

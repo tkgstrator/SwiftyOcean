@@ -15,7 +15,7 @@ final class Converter {
     static func convert(_ seed: String, completion: @escaping (Result<String, Error>) -> ()) {
         let url: URL = URL(string: "https://armconverter.com/api/convert")!
         let parameters: Parameters = [
-            "asm": ["MOV X0, #0x\(seed.prefix(4))", "MOVK X0, #0x\(seed.suffix(4))"].joined(separator: "\n"),
+            "asm": ["MOV X0, #0x\(seed.prefix(4))0000", "MOVK X0, #0x\(seed.suffix(4))"].joined(separator: "\n"),
             "arch": ["arm64"]
         ]
         

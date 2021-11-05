@@ -11,7 +11,7 @@ public final class Ocean: Random {
     /// 初期ゲームシード
     public private(set) var mGameSeed: UInt32
     /// WAVE情報
-    public var mWave: [Wave] = Array<Wave>()
+    public private(set) var mWave: [Wave] = Array<Wave>()
     /// WAVE情報更新タイミング配列
     private static let mWaveArray: [[UpdateType]] = [
         [2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 3, 3, 3, 3].compactMap({ UpdateType(rawValue: $0) }),
@@ -109,6 +109,7 @@ public final class Ocean: Random {
         
         private func getEnemyArray(mWaveNum: Int) -> [WaveUpdateEvent] {
             let mWaveArray: [UpdateType] = Ocean.mWaveArray[mWaveNum]
+            print(mWaveArray)
             let rnd: Random = Random(seed: self.mWaveSeed)
             rnd.getU32()
 
@@ -121,7 +122,10 @@ public final class Ocean: Random {
                 switch type {
                     case .update:
                         // 一回無駄に消化
-                        getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)
+                        let appearId = getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)
+                        mEnemyAppearId.append(AppearType(rawValue: appearId)!)
+                        print(appearId)
+                        break
                     case .change:
                         guard let appearId: AppearType = AppearType(rawValue: getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)) else { return [] }
                         if !mBossArray.isEmpty {
@@ -145,6 +149,7 @@ public final class Ocean: Random {
                         break
                 }
             }
+            print(mEnemyAppearId)
             return mWaveEventArray
         }
 
@@ -187,43 +192,43 @@ public final class Ocean: Random {
 
         /// シャケが出現する湧き方向を返す
         @discardableResult
-        private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
-            let mArray: [UInt8] = [1, 2, 3]
-            var x9: UInt8 = 0
-            var w9: UInt8 = 0
-            var x10: UInt8 = 0
-            var x11: UInt8 = 0
-            var x12: UInt8 = 0
-            var v17: UInt8 = 0
-            var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: mArray.count)
-            w7.initialize(from: mArray, count: mArray.count)
-            var x7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: mArray.count)
-            x7.initialize(from: mArray, count: mArray.count)
+        private func getEnemyAppearId(random: UInt32, lastAppearId: Int8) -> Int8 {
+            var x9: Int8 = 0
+            var w9: Int8 = 0
+            var x10: Int8 = 0
+            var x11: Int8 = 0
+            var x12: Int8 = 0
+            var v17: Int8 = 0
+            var w7: UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: 3)
+            w7.initialize(from: [1, 2, 3], count: 3)
+            var x7: UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: 3)
+            x7.initialize(from: [1, 2, 3], count: 3)
             var x8: UInt64 = 0
             var w8: UInt64 = 0
-            let v5: UInt8 = lastAppearId
-            var x6: UInt8 = 3
-            var w6: UInt8 = 3
-            var id: UInt8 = lastAppearId
+            let v5: Int8 = lastAppearId
+            var x6: Int8 = 3
+            var w6: Int8 = 3
+            var id: Int8 = lastAppearId
             
-            if !(UInt32(v5) & 0x80000000 == 0) {
-                if (!w6) {
-                    return v5
-                }
+            print(lastAppearId != -1, (Int64(lastAppearId) & 0x80000000))
+            if lastAppearId != -1 {
                 w8 = UInt64(w6 - 1)
-                repeat {
-                    v17 = UInt8(w8)
+                while true {
+                    v17 = Int8(w8)
                     w9 = w7.pointee
-                    if (w7.pointee < v5) {
+                    if (w9 < lastAppearId) {
                         break
                     }
-                    w6 -= w9 == v5
-                    if (w9 == v5) {
+                    w6 -= w9 == lastAppearId ? 1 : 0
+                    if (w9 == lastAppearId) {
                         break
                     }
                     w8 = UInt64(v17 - 1)
                     w7 = w7.advanced(by: 1)
-                } while ((v17) != 0)
+                    if v17 == 0 {
+                        break
+                    }
+                }
             }
             
             if (w6 < 1) {
@@ -234,7 +239,7 @@ public final class Ocean: Random {
             
             while true {
                 x9 = x7.pointee
-                x10 = x8 == 0 ? 0 : UInt8(x8 - 1)
+                x10 = x8 == 0 ? 0 : Int8(x8 - 1)
                 x11 = x8 == 0 ? x7.pointee : id
                 x12 = x9 == v5 ? 5 : x8 == 0
                 if (x9 != v5) {
@@ -242,14 +247,17 @@ public final class Ocean: Random {
                     id = x11
                 }
                 if ((x12 & 7) != 5 && ((x12 & 7) != 0)) {
+                    print("Break")
                     break
                 }
                 x6 -= 1
                 x7 = x7.advanced(by: 1)
                 if (!x6) {
+                    print("Return V5")
                     return v5
                 }
             }
+            print("Return ID")
             return id
         }
     }
@@ -260,44 +268,44 @@ public final class Ocean: Random {
         public let salmonid: [SalmonType]
     }
     
-    public enum AppearType: UInt8, CaseIterable {
-        case none   = 0
+    public enum AppearType: Int8, CaseIterable {
+        case none   = -1
         case right  = 1
         case center = 2
         case left   = 3
     }
     
     /// 各タイミングでのアップデート種類
-    public enum UpdateType: Int, CaseIterable {
+    public enum UpdateType: UInt8, CaseIterable {
         /// 湧き方向変化
-        case change
+        case change = 0
         /// オオモノ出現
-        case appear
+        case appear = 1
         /// 乱数のみアップデート
-        case update
+        case update = 2
         /// なにもしない
-        case none
+        case none   = 3
     }
     
 
 }
 
-extension UInt8 {
+extension Int8 {
 //    static func &(left: UInt8, right: UInt8) -> Bool {
 //        left & right == 0
 //    }
     
-    static func == (left: UInt8, right: UInt8) -> UInt8 {
+    static func == (left: Int8, right: Int8) -> Int8 {
         left == right ? 1 : 0
     }
     
-    static prefix func !(left: UInt8) -> Bool {
+    static prefix func !(left: Int8) -> Bool {
         left == 0
     }
 }
 
 extension UInt64 {
-    static func == (left: UInt64, right: UInt64) -> UInt8 {
+    static func == (left: UInt64, right: UInt64) -> Int8 {
         left == right ? 1 : 0
     }
     
