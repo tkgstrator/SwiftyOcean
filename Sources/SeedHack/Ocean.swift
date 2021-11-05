@@ -197,17 +197,15 @@ public final class Ocean: Random {
             var w6: UInt8 = 3
             var id: UInt8 = lastAppearId
             
-            if lastAppearId != 0 {
-                for _ in [0, 1, 2] {
-                    if (w7.pointee < lastAppearId) {
-                        break
-                    }
-                    w6 -= w7.pointee == lastAppearId ? 1 : 0
-                    if (w7.pointee == lastAppearId) {
-                        break
-                    }
-                    w7 = w7.advanced(by: 1)
+            for _ in [0, 1, 2] {
+                if (w7.pointee < lastAppearId) {
+                    break
                 }
+                w6 -= w7.pointee == lastAppearId ? 1 : 0
+                if (w7.pointee == lastAppearId) {
+                    break
+                }
+                w7 = w7.advanced(by: 1)
             }
             
             w7.initialize(from: [1, 2, 3], count: 3)
