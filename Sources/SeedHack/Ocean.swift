@@ -191,7 +191,6 @@ public final class Ocean: Random {
         @discardableResult
         private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
             var x9: UInt8 = 0
-            var w9: UInt8 = 0
             var x10: UInt8 = 0
             var x11: UInt8 = 0
             var x12: UInt8 = 0
@@ -206,12 +205,11 @@ public final class Ocean: Random {
             if lastAppearId != 0 {
                 while true {
                     v17 -= 1
-                    w9 = w7.pointee
-                    if (w9 < lastAppearId) {
+                    if (w7.pointee < lastAppearId) {
                         break
                     }
-                    w6 -= w9 == lastAppearId ? 1 : 0
-                    if (w9 == lastAppearId) {
+                    w6 -= w7.pointee == lastAppearId ? 1 : 0
+                    if (w7.pointee == lastAppearId) {
                         break
                     }
                     w7 = w7.advanced(by: 1)
