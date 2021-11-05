@@ -10,14 +10,31 @@ final class SeedHackTests: XCTestCase {
         
         let mAppearIds: [[Int8]] = [
             [2, 2, 1, 3, 1, 2, 2, 2],
-            [2, 1, 3, 3, 3, 2, 2, 2]
+            [2, 1, 3, 3, 3, 2, 2, 2],
+            [1, 2, 3, 1, 2, 1, 3, 2],
+            [2, 1, 3, 3, 1, 2, 3, 2], // ラッシュ
+            [3, 1, 3, 1, 2, 1, 2, 1],
+            [3, 2, 1, 2, 3, 3, 2, 3],
+            [2, 2, 1, 3, 3, 2, 2, 1],
+            [3, 2, 2, 1, 2, 2, 3, 3],
+            [3, 3, 1, 3, 1, 2, 3, 3],
+            [3, 3, 3, 2, 2, 3, 2, 1],
+            [3, 3, 2, 3, 3, 1, 3, 1],
+            [2, 3, 3, 1, 3, 1, 3, 1],
+            [3, 1, 2, 1, 2, 1, 3, 1],
+            [2, 1, 2, 1, 3, 1, 2, 1], // グリル
+            [1, 2, 2, 3, 1, 3, 1, 3],
+            [3, 3, 2, 1, 3, 3, 3, 3]
         ]
         
-        let ocean = Ocean(mGameSeed: 1)
-        ocean.getWaveDetail()
-        let wave = ocean.mWave[0]
-        let mAppearId: [Int8] = wave.mWaveUpdateEventArray.map({ $0.appearType.rawValue })
-        print(mAppearId)
-        XCTAssertEqual(mAppearId, mAppearIds[1])
+        for mGameSeed in UInt32(0) ..< UInt32(mAppearIds.count) {
+            let ocean = Ocean(mGameSeed: mGameSeed)
+            ocean.getWaveDetail()
+            
+            let wave = ocean.mWave[0]
+            let mAppearId: [Int8] = wave.mWaveUpdateEventArray.map({ $0.appearType.rawValue })
+            print(mAppearId)
+            XCTAssertEqual(mAppearId, mAppearIds[Int(mGameSeed)])
+        }
     }
 }
