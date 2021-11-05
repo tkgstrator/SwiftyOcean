@@ -190,7 +190,6 @@ public final class Ocean: Random {
         /// シャケが出現する湧き方向を返す
         @discardableResult
         private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
-            var x9: UInt8 = 0
             var x10: UInt8 = 0
             var x11: UInt8 = 0
             var x12: UInt8 = 0
@@ -202,7 +201,7 @@ public final class Ocean: Random {
             var id: UInt8 = lastAppearId
             
             if lastAppearId != 0 {
-                for _ in [2, 1, 0] {
+                for _ in [0, 1, 2] {
                     if (w7.pointee < lastAppearId) {
                         break
                     }
@@ -218,11 +217,10 @@ public final class Ocean: Random {
             x8 = (UInt64(random) &* UInt64(w6)) >> 0x20
             
             while true {
-                x9 = w7.pointee
                 x10 = x8 == 0 ? 0 : UInt8(x8 - 1)
                 x11 = x8 == 0 ? w7.pointee : id
-                x12 = x9 == lastAppearId ? 5 : x8 == 0 ? 1 : 0
-                if (x9 != lastAppearId) {
+                x12 = w7.pointee == lastAppearId ? 5 : x8 == 0 ? 1 : 0
+                if (w7.pointee != lastAppearId) {
                     x8 = UInt64(x10)
                     id = x11
                 }
