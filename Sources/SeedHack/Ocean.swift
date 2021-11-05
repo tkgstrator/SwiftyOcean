@@ -198,19 +198,16 @@ public final class Ocean: Random {
             var v17: Int8 = 0
             var w7: UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: 3)
             w7.initialize(from: [1, 2, 3], count: 3)
-//            var x7: UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: 3)
-//            x7.initialize(from: [1, 2, 3], count: 3)
             var x8: UInt64 = 0
-            var w8: UInt64 = 0
-            let v5: Int8 = lastAppearId
+            var w8: Int8 = 0
             var x6: Int8 = 3
             var w6: Int8 = 3
             var id: Int8 = lastAppearId
             
             if lastAppearId != -1 {
-                w8 = UInt64(w6 - 1)
+                w8 = w6 - 1
                 while true {
-                    v17 = Int8(w8)
+                    v17 = w8
                     w9 = w7.pointee
                     if (w9 < lastAppearId) {
                         break
@@ -219,16 +216,12 @@ public final class Ocean: Random {
                     if (w9 == lastAppearId) {
                         break
                     }
-                    w8 = UInt64(v17 - 1)
+                    w8 = v17 - 1
                     w7 = w7.advanced(by: 1)
                     if v17 == 0 {
                         break
                     }
                 }
-            }
-            
-            if (w6 < 1) {
-                return v5
             }
             
             w7.initialize(from: [1, 2, 3], count: 3)
@@ -238,8 +231,8 @@ public final class Ocean: Random {
                 x9 = w7.pointee
                 x10 = x8 == 0 ? 0 : Int8(x8 - 1)
                 x11 = x8 == 0 ? w7.pointee : id
-                x12 = x9 == v5 ? 5 : x8 == 0
-                if (x9 != v5) {
+                x12 = x9 == lastAppearId ? 5 : x8 == 0
+                if (x9 != lastAppearId) {
                     x8 = UInt64(x10)
                     id = x11
                 }
@@ -249,7 +242,7 @@ public final class Ocean: Random {
                 x6 -= 1
                 w7 = w7.advanced(by: 1)
                 if (!x6) {
-                    return v5
+                    return lastAppearId
                 }
             }
             return id
