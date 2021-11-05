@@ -189,22 +189,22 @@ public final class Ocean: Random {
 
         /// シャケが出現する湧き方向を返す
         @discardableResult
-        private func getEnemyAppearId(random: UInt32, lastAppearId: Int8) -> Int8 {
-            var x9: Int8 = 0
-            var w9: Int8 = 0
-            var x10: Int8 = 0
-            var x11: Int8 = 0
-            var x12: Int8 = 0
-            var v17: Int8 = 0
-            var w7: UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: 3)
+        private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
+            var x9: UInt8 = 0
+            var w9: UInt8 = 0
+            var x10: UInt8 = 0
+            var x11: UInt8 = 0
+            var x12: UInt8 = 0
+            var v17: UInt8 = 0
+            var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
             w7.initialize(from: [1, 2, 3], count: 3)
             var x8: UInt64 = 0
-            var w8: Int8 = 0
-            var x6: Int8 = 3
-            var w6: Int8 = 3
-            var id: Int8 = lastAppearId
+            var w8: UInt8 = 0
+            var x6: UInt8 = 3
+            var w6: UInt8 = 3
+            var id: UInt8 = lastAppearId
             
-            if lastAppearId != -1 {
+            if lastAppearId != 0 {
                 w8 = w6 - 1
                 while true {
                     v17 = w8
@@ -229,9 +229,9 @@ public final class Ocean: Random {
             
             while true {
                 x9 = w7.pointee
-                x10 = x8 == 0 ? 0 : Int8(x8 - 1)
+                x10 = x8 == 0 ? 0 : UInt8(x8 - 1)
                 x11 = x8 == 0 ? w7.pointee : id
-                x12 = x9 == lastAppearId ? 5 : x8 == 0
+                x12 = x9 == lastAppearId ? 5 : x8 == 0 ? 1 : 0
                 if (x9 != lastAppearId) {
                     x8 = UInt64(x10)
                     id = x11
@@ -241,7 +241,7 @@ public final class Ocean: Random {
                 }
                 x6 -= 1
                 w7 = w7.advanced(by: 1)
-                if (!x6) {
+                if (x6 == 0) {
                     return lastAppearId
                 }
             }
@@ -255,8 +255,8 @@ public final class Ocean: Random {
         public let salmonid: [SalmonType]
     }
     
-    public enum AppearType: Int8, CaseIterable {
-        case none   = -1
+    public enum AppearType: UInt8, CaseIterable {
+        case none   = 0
         case right  = 1
         case center = 2
         case left   = 3
