@@ -194,19 +194,8 @@ public final class Ocean: Random {
             var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
             w7.initialize(from: [1, 2, 3], count: 3)
             var x8: Int8 = 0
-            var w6: UInt8 = 3
+            let w6 = lastAppearId == 1 ? 2 : 3
             var id: UInt8 = lastAppearId
-            
-            for _ in Range(0 ... 2) {
-                if (w7.pointee < lastAppearId) {
-                    break
-                }
-                w6 -= w7.pointee == lastAppearId ? 1 : 0
-                if (w7.pointee == lastAppearId) {
-                    break
-                }
-                w7 = w7.advanced(by: 1)
-            }
             
             w7.initialize(from: [1, 2, 3], count: 3)
             x8 = Int8((UInt64(random) &* UInt64(w6)) >> 0x20)
