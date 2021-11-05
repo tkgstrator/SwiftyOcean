@@ -193,11 +193,11 @@ public final class Ocean: Random {
             var x12: UInt8 = 0
             var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
             w7.initialize(from: [1, 2, 3], count: 3)
-            var x8: UInt8 = 0
+            var x8: Int8 = 0
             var w6: UInt8 = 3
             var id: UInt8 = lastAppearId
             
-            for _ in [0, 1, 2] {
+            for _ in Range(0 ... 2) {
                 if (w7.pointee < lastAppearId) {
                     break
                 }
@@ -209,15 +209,16 @@ public final class Ocean: Random {
             }
             
             w7.initialize(from: [1, 2, 3], count: 3)
-            x8 = UInt8((UInt64(random) &* UInt64(w6)) >> 0x20)
+            x8 = Int8((UInt64(random) &* UInt64(w6)) >> 0x20)
             
-            for _ in [2, 1, 0] {
+            for _ in Range(0 ... 2) {
+                // x12は0, 1, 5のどれかの値を持つ
                 x12 = w7.pointee == lastAppearId ? 5 : x8 == 0 ? 1 : 0
                 if (w7.pointee != lastAppearId) {
-                    x8 = x8 == 0 ? 0 : x8 - 1
+                    x8 = max(0, x8 - 1)
                     id = x8 == 0 ? w7.pointee : id
                 }
-                if ((x12 & 7) != 5 && ((x12 & 7) != 0)) {
+                if x12 == 1 {
                     return id
                 }
                 w7 = w7.advanced(by: 1)
