@@ -191,26 +191,24 @@ public final class Ocean: Random {
         @discardableResult
         private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
             var x12: UInt8 = 0
-            var w7: UnsafeMutablePointer<UInt8> = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
-            w7.initialize(from: [1, 2, 3], count: 3)
-            var x8: Int8 = 0
-            let w6 = lastAppearId == 1 ? 2 : 3
             var id: UInt8 = lastAppearId
             
-            w7.initialize(from: [1, 2, 3], count: 3)
-            x8 = Int8((UInt64(random) &* UInt64(w6)) >> 0x20)
+            // 前回の湧き方向が1なら2、それ以外なら3
+            let w6 = lastAppearId == 1 ? 2 : 3
             
-            for _ in Range(0 ... 2) {
+            // 前回の湧き方向が1なら0, 1、それ以外なら0, 1, 2のいずれかを返す
+            var x8 = Int8((UInt64(random) &* UInt64(w6)) >> 0x20)
+            
+            for mAppearId in UInt8(1) ... UInt8(3) {
                 // x12は0, 1, 5のどれかの値を持つ
-                x12 = w7.pointee == lastAppearId ? 5 : x8 == 0 ? 1 : 0
-                if (w7.pointee != lastAppearId) {
+                x12 = mAppearId == lastAppearId ? 5 : x8 == 0 ? 1 : 0
+                if (mAppearId != lastAppearId) {
                     x8 = max(0, x8 - 1)
-                    id = x8 == 0 ? w7.pointee : id
+                    id = x8 == 0 ? mAppearId : id
                 }
                 if x12 == 1 {
                     return id
                 }
-                w7 = w7.advanced(by: 1)
             }
             return lastAppearId
         }
