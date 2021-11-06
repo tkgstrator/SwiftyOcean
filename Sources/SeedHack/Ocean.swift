@@ -32,8 +32,8 @@ public final class Ocean: Random {
     
     public func getWaveDetail() {
         self.mWave[0].getWaveArray(mWaveNum: 0)
-//        self.mWave[1].getWaveArray(mWaveNum: 1)
-//        self.mWave[2].getWaveArray(mWaveNum: 2)
+        self.mWave[1].getWaveArray(mWaveNum: 1)
+        self.mWave[2].getWaveArray(mWaveNum: 2)
     }
     
     private func getWaveInfo() -> [Wave] {
@@ -97,11 +97,11 @@ public final class Ocean: Random {
                 case .noevent, .cohockcharge, .fog:
                     mWaveUpdateEventArray = getEnemyArray(mWaveNum: mWaveNum)
                 case .rush:
-                    break
+                    mWaveUpdateEventArray = getEnemyArray(mWaveNum: mWaveNum)
                 case .goldieseeking:
                     mGeyserArray = getGeyserArray(.shakeride, waterLevel: waterLevel)
                 case .griller:
-                    break
+                    mWaveUpdateEventArray = getEnemyArray(mWaveNum: mWaveNum)
                 case .mothership:
                     break
             }
@@ -133,6 +133,10 @@ public final class Ocean: Random {
                         mEnemyAppearId.append(appearId)
                     case .appear:
                         switch eventType {
+                            case .rush:
+                                mBossArray.append(.shakegoldie)
+                            case .griller:
+                                mBossArray.append(.shakedozer)
                             case .fog:
                                 if (mWaveEventArray.flatMap({ $0.salmonid }).count + mBossArray.count + 1) % 5 == 0 {
                                     rnd.getU32()

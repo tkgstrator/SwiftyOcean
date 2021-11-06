@@ -45,21 +45,23 @@ struct AnalyzeSeedView: View {
                     }
                 })
             }
-            .searchable(text: $initialSeed, placement: .navigationBarDrawer, prompt: "Input the initial seed")
-            .onChange(of: initialSeed, perform: { mGameSeed in
-                self.initialSeed = mGameSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
-                if let mGameSeed = UInt32(initialSeed, radix: 16) {
-                    ocean = Ocean(mGameSeed: mGameSeed)
-                    ocean.getWaveDetail()
-                    Converter.convert(self.initialSeed, completion: { result in
-                        switch result {
-                            case .success(let value):
-                                self.arm64 = value
-                            case .failure(let error):
-                                print(error)
-                        }
-                    })
-                }
+            .navigationSearchBar({
+                SearchBar("Initial seed", text: $initialSeed, onEditingChanged: { _ in
+                    self.initialSeed = self.initialSeed.map({ String($0).uppercased() }).filter({ alphabet.contains($0) }).joined()
+                }, onCommit: {
+                    if let mGameSeed = UInt32(initialSeed, radix: 16) {
+                        ocean = Ocean(mGameSeed: mGameSeed)
+                        ocean.getWaveDetail()
+                        Converter.convert(String(format: "%08X", mGameSeed), completion: { result in
+                            switch result {
+                                case .success(let value):
+                                    self.arm64 = value
+                                case .failure(let error):
+                                    print(error)
+                            }
+                        })
+                    }
+                })
             })
             .onAppear {
                 if let mGameSeed = UInt32(initialSeed, radix: 16) {
@@ -106,7 +108,7 @@ struct WaveDetailView: View {
     
     var body: some View {
         switch wave.eventType {
-            case .noevent, .fog, .cohockcharge:
+            case .noevent, .fog, .cohockcharge, .griller, .rush:
                 ScrollView {
                     ForEach(wave.mWaveUpdateEventArray) { wave in
                         HStack(content: {
