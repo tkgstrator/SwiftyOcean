@@ -32,8 +32,8 @@ public final class Ocean: Random {
     
     public func getWaveDetail() {
         self.mWave[0].getWaveArray(mWaveNum: 0)
-        self.mWave[1].getWaveArray(mWaveNum: 1)
-        self.mWave[2].getWaveArray(mWaveNum: 2)
+//        self.mWave[1].getWaveArray(mWaveNum: 1)
+//        self.mWave[2].getWaveArray(mWaveNum: 2)
     }
     
     private func getWaveInfo() -> [Wave] {
@@ -121,11 +121,11 @@ public final class Ocean: Random {
                 switch type {
                     case .update:
                         // 一回無駄に消化
-                        let appearId = getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)
-                        mEnemyAppearId.append(AppearType(rawValue: appearId)!)
+                        let appearId: AppearType = getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId)
+                        mEnemyAppearId.append(appearId)
                         break
                     case .change:
-                        guard let appearId: AppearType = AppearType(rawValue: getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId.rawValue)) else { return [] }
+                        let appearId: AppearType = getEnemyAppearId(random: rnd.getU32(), lastAppearId: mLastEnemyAppearId)
                         if !mBossArray.isEmpty {
                             mWaveEventArray.append(WaveUpdateEvent(index: mWaveEventArray.count, appearType: mLastEnemyAppearId, salmonid: mBossArray))
                             mBossArray.removeAll()
@@ -189,22 +189,28 @@ public final class Ocean: Random {
 
         /// シャケが出現する湧き方向を返す
         @discardableResult
-        private func getEnemyAppearId(random: UInt32, lastAppearId: UInt8) -> UInt8 {
+        private func getEnemyAppearId(random: UInt32, lastAppearId: AppearType) -> AppearType {
             // 前回の湧き方向が1なら2、それ以外なら3
-            let w6 = lastAppearId == 1 ? 2 : 3
+            let w6: UInt8 = lastAppearId == .right ? 2 : 3
             // 前回の湧き方向が1なら0, 1、それ以外なら0, 1, 2のいずれかを返す
-            var x8 = Int8((UInt64(random) &* UInt64(w6)) >> 0x20)
+            let w8: UInt64 = (UInt64(random) * UInt64(w6)) >> 0x20 + 1
+            let x8: AppearType = AppearType(rawValue: UInt8(w8))!
 
-            for mAppearId in Range(1 ... 3) {
-                if mAppearId != lastAppearId {
-                    if x8 == 0 {
-                        return UInt8(mAppearId)
-                    } else {
-                        x8 -= 1
+            switch lastAppearId {
+                case .none, .left:
+                    return AppearType(rawValue: x8.rawValue)!
+                case .right:
+                    return AppearType(rawValue: x8.rawValue + 1)!
+                case .center:
+                    switch x8 {
+                        case .right, .none:
+                            return .right
+                        case .center:
+                            return .left
+                        case .left:
+                            return .center
                     }
-                }
             }
-            return lastAppearId
         }
     }
     
@@ -215,9 +221,13 @@ public final class Ocean: Random {
     }
     
     public enum AppearType: UInt8, CaseIterable {
+        /// 0: 初期状態
         case none   = 0
+        /// 1: 右湧き
         case right  = 1
+        /// 2: 中央湧き
         case center = 2
+        /// 3: 左湧き
         case left   = 3
     }
     
